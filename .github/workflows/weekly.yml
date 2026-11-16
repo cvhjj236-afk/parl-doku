@@ -19,10 +19,12 @@ jobs:
           python-version: '3.12'
       - name: Schnittstelle prüfen
         run: python scripts/probe.py
+      - name: Zahlen in den Seiten aktualisieren
+        run: python scripts/update_pages.py
       - name: Ergebnis committen
         run: |
           git config user.name "parl-doku-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data
+          git add -A
           git commit -m "Wöchentliche Prüfung $(date -u +%F)" || echo "nichts zu committen"
           git push
