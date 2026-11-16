@@ -10,3 +10,5 @@ Hosting: Cloudflare Pages, Domain `parl-doku.hoferbaut.fyi`. Kein Build-Schritt,
 Daten: Parlament Österreich, CC BY 4.0.
 
 Live: https://parl-doku.hoferbaut.fyi
+
+Deployment: automatisch über Cloudflare Pages bei Push auf main.
