@@ -65,6 +65,12 @@ paths:
               beschluesse:
                 summary: Beschlüsse NR, XXVII. GP
                 value: { NRBR: [NR], GP_CODE: [XXVII], VHG: [BNR] }
+              buergerinitiativen:
+                summary: Bürgerinitiativen, XXVII. GP
+                value: { NRBR: [NR], GP_CODE: [XXVII], VHG: [BI] }
+              petitionen:
+                summary: Petitionen, alle GPs
+                value: { VHG: [PET] }
               gesetzesantraege_br:
                 summary: Gesetzesanträge des BR (mit NRBR NR)
                 value: { NRBR: [NR], VHG: [GABR13] }
@@ -105,6 +111,78 @@ paths:
           content:
             application/json:
               schema: { type: object }
+  /Filter/api/filter/data/211?js=eval&showAll=true:
+    post:
+      summary: Stenographische Protokolle (16 Spalten)
+      description: Sitzungen von NR und BR. NBVS NRSITZ oder BRSITZ, DATUM im Format yyyy-mm-dd (Start, Ende). Ohne GP_CODE alle GPs (I bis XXVIII).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: { NBVS: { type: array, items: { type: string, enum: [NRSITZ, BRSITZ] } }, GP_CODE: { type: array, items: { type: string } }, DATUM: { type: array, items: { type: string } } }
+            example: { GP_CODE: [XXVII], NBVS: [NRSITZ], DATUM: ['2023-02-01', '2023-08-01'] }
+      responses:
+        '200':
+          description: pages, lastSync, count, header, rows (16 Spalten)
+          content:
+            application/json:
+              schema: { type: object }
+  /Filter/api/json/post?jsMode=EVAL&FBEZ=WFP_007&listeId=11070&showAll=true:
+    post:
+      summary: Plenarsitzungen (11 Spalten, kein lastSync)
+      description: Sitzungen NR und BR. Bei NRBRBV=NR ohne GP kommt nur XXVII.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: { NRBRBV: { type: array, items: { type: string, enum: [NR, BR] } }, GP: { type: array, items: { type: string } } }
+            example: { NRBRBV: [NR], GP: [XXVII] }
+      responses:
+        '200':
+          description: pages, count, header, rows (11 Spalten)
+          content:
+            application/json:
+              schema: { type: object }
+  /Filter/api/filter/data/409?1=1&showAll=true&export=true:
+    post:
+      summary: Parlamentarier:innen seit 1918 (10 Spalten, Spalte Attribute ist ein Objekt)
+      description: Leerer Body liefert alle Personen. Filter-Schlüssel ATTR_JSON.mandate_detail.* haben Punkte im Namen.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: { GESCHL_CODE: { type: array, items: { type: string, enum: [M, W] } }, PRAES: { type: array, items: { type: string, enum: ['J'] } } }
+            example: { GESCHL_CODE: [W] }
+      responses:
+        '200':
+          description: pages, lastSync, count, header, rows (10 Spalten)
+          content:
+            application/json:
+              schema: { type: object }
+  /Filter/api/json/post?jsMode=EVAL&FBEZ=WFW_002&listeId=10002&showAll=true:
+    post:
+      summary: Aktuelle Abgeordnete NR (12 Spalten, kein lastSync)
+      description: M und/oder W muss gesetzt sein, sonst Antwort mit errorMsg statt rows.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: { M: { type: array, items: { type: string, enum: [M] } }, W: { type: array, items: { type: string, enum: [W] } }, FR: { type: array, items: { type: string } }, WK: { type: array, items: { type: string } }, BL: { type: array, items: { type: string } }, FUNK: { type: array, items: { type: string } }, WP: { type: array, items: { type: string } }, PLZ: { type: array, items: { type: string } } }
+            example: { M: [M], W: [W] }
+      responses:
+        '200':
+          description: pages, count, header, rows (12 Spalten) oder errorMsg
+          content:
+            application/json:
+              schema: { type: object }
   /gegenstand/{gp}/{ityp}/{inr}:
     get:
       summary: Detailseite (Geschichtsseite) eines Gegenstands als JSON
@@ -134,7 +212,7 @@ components:
         NRBR: { type: array, items: { type: string, enum: [NR, BR] }, description: Gremium }
         GP_CODE: { type: array, items: { type: string }, description: 'Gesetzgebungsperiode, römisch (XX … XXVIII)' }
         DATUM_VON: { type: array, items: { type: string }, description: 'Zeitraum, Format dd.mm.yyyy (Start und Ende)' }
-        VHG: { type: array, items: { type: string, enum: [J_JPR_M, J_JPR_M-BR, RV, ANTR, ANTR-BR, GABR, GABR13, AUB, AUB-BR, BNR] }, description: 'Gegenstand = Datensatz. Anfragen NR J_JPR_M, Anfragen BR J_JPR_M-BR, Regierungsvorlagen RV, Anträge NR ANTR, Anträge BR ANTR-BR (Doku sagt ANTR, liefert 0 Treffer), Gesetzesanträge des BR GABR und GABR13 (mit NRBR=NR), Ausschussberichte NR AUB und BR AUB-BR, Beschlüsse BNR (NR und BR).' }
+        VHG: { type: array, items: { type: string, enum: [J_JPR_M, J_JPR_M-BR, RV, ANTR, ANTR-BR, GABR, GABR13, AUB, AUB-BR, BNR, BI, PET] }, description: 'Gegenstand = Datensatz. Anfragen NR J_JPR_M, Anfragen BR J_JPR_M-BR, Regierungsvorlagen RV, Anträge NR ANTR, Anträge BR ANTR-BR (Doku sagt ANTR, liefert 0 Treffer), Gesetzesanträge des BR GABR und GABR13 (mit NRBR=NR), Ausschussberichte NR AUB und BR AUB-BR, Beschlüsse BNR (NR und BR), Bürgerinitiativen BI, Petitionen PET (beide nur NR).' }
         DOKTYP: { type: array, items: { type: string }, description: 'Art. Anfragen NR: J, JPR. Regierungsvorlagen: RV, RV-KN, RV-PN. Anträge NR: A, A(E), AA, AEA, AMIN, ARH2, AVB, BUA, UEA sowie undokumentiert UEAM, AAA, ZA, ARH1, GAA, EAA. Anträge BR: A-BR, A(E)-BR, AA-BR, AEA-BR, UEA-BR. Gesetzesanträge: GABR, GABR13. Ausschussberichte: AUB, AUB-KN, AUB-PN, AUB-BR. Beschlüsse: BNR, BS, BSE, BSESM, BS-BR sowie undokumentiert BSW, BSESMP.' }
         VHG2: { type: array, items: { type: string, enum: [JMIN, JPRPR, JRH, JPRAUS, JMIN-BR, JPRPR-BR, M-BR, RV, SELBST, UEA, AA, AUSSELBST, ANTR, ZA, SELBST-BR, UEA-BR, AEA-BR, AA-BR, GABR, GABR13, AUB, AUB-BR, BNRNR] }, description: 'Unterart (beobachtet). JRH, JPRAUS, M-BR und die Antragsgruppen sind in der Doku nicht beschrieben.' }
         THEMEN: { type: array, items: { type: string }, description: '20 feste Themenbereiche' }
