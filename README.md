@@ -8,3 +8,5 @@ Inoffizielle API-Doku zu den schriftlichen Anfragen (NR und BR) des österreichi
 
 Hosting: Cloudflare Pages, Domain `parl-doku.hoferbaut.fyi`. Kein Build-Schritt, Ausgabeordner ist das Wurzelverzeichnis.
 Daten: Parlament Österreich, CC BY 4.0.
+
+Live: https://parl-doku.hoferbaut.fyi
