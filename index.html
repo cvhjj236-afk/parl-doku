@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API-Doku: Schriftliche Anfragen (Parlament Österreich)</title>
+<style>
+:root{--blau:#132843;--papier:#f3efe3;--gold:#b8a552;--post:#2f8f5b;--get:#2b6cb0;--line:#d9d3c0;--txt:#1d2733;--mute:#5d6672;--code:#0f1c2e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papier);color:var(--txt);font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
+header{background:var(--blau);color:#fff;padding:28px 24px 22px;border-bottom:4px solid var(--gold)}
+header h1{margin:0 0 4px;font-size:24px}
+header p{margin:0;opacity:.85;max-width:820px}
+.tag{display:inline-block;background:var(--gold);color:var(--blau);font-weight:600;font-size:12px;padding:2px 8px;border-radius:10px;margin-right:6px}
+main{max-width:980px;margin:0 auto;padding:24px}
+h2{margin:32px 0 10px;font-size:19px;color:var(--blau);border-bottom:2px solid var(--gold);padding-bottom:4px}
+.note{background:#fff;border-left:4px solid var(--gold);padding:10px 14px;margin:12px 0;border-radius:0 6px 6px 0}
+.warn{border-left-color:#c0562b}
+code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+code{background:#e9e4d2;padding:1px 5px;border-radius:4px}
+pre{background:var(--code);color:#e6edf5;padding:12px 14px;border-radius:6px;overflow:auto;margin:8px 0;position:relative}
+pre code{background:none;padding:0;color:inherit}
+.op{background:#fff;border:1px solid var(--line);border-radius:8px;margin:14px 0;overflow:hidden}
+.op>summary{list-style:none;cursor:pointer;display:flex;gap:12px;align-items:center;padding:12px 14px}
+.op>summary::-webkit-details-marker{display:none}
+.m{color:#fff;font-weight:700;font-size:13px;padding:5px 12px;border-radius:4px;min-width:64px;text-align:center}
+.POST{background:var(--post)}.GET{background:var(--get)}
+.path{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:600;word-break:break-all}
+.sum{color:var(--mute);margin-left:auto;font-size:13px;text-align:right}
+.body{padding:4px 18px 18px;border-top:1px solid var(--line)}
+.body h3{font-size:14px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin:18px 0 6px}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:14px}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#ece7d4;font-size:13px}
+.r{color:#c0392b;font-size:12px;margin-left:4px}
+.pill{font-size:11px;padding:1px 7px;border-radius:9px;background:#e9e4d2;margin-left:4px;white-space:nowrap}
+.no{background:#f6d9cf;color:#8a2e12}
+.copy{position:absolute;top:6px;right:6px;background:#2a3d57;color:#fff;border:0;border-radius:4px;padding:3px 9px;cursor:pointer;font-size:12px}
+.copy:hover{background:#3a5273}
+textarea{width:100%;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--txt);resize:vertical}
+textarea:focus{outline:2px solid var(--gold)}
+.preset{background:#fff;border:1px solid var(--gold);color:var(--blau);border-radius:14px;padding:3px 12px;margin:0 6px 6px 0;cursor:pointer;font-size:13px}
+.preset:hover{background:var(--gold)}
+.state{font-size:13px;margin:4px 0;min-height:18px}.ok{color:#2f8f5b}.bad{color:#c0392b}
+footer{max-width:980px;margin:0 auto;padding:10px 24px 40px;color:var(--mute);font-size:13px}
+@media(max-width:640px){.sum{display:none}main{padding:14px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Schriftliche Anfragen: API-Doku</h1>
+  <p>Open-Data-Schnittstelle des österreichischen Parlaments für Anfragen im Nationalrat (NR) und Bundesrat (BR).</p>
+  <p style="margin-top:10px"><span class="tag">Stand 16.11.2026</span><span class="tag">Daten: CC BY 4.0</span><span class="tag">OpenAPI 3.0.3</span></p>
+</header>
+<main>
+
+<div class="note">Inoffizielle Doku, erstellt aus der Datensatzbeschreibung und aus Beobachtung der Schnittstelle. Wo beides abweicht, steht die Beobachtung, mit Hinweis. Keine Garantie auf Stabilität: Rate Limits, Fehlercodes und Aktualisierungsintervall sind vom Parlament nicht dokumentiert.</div>
+
+<h2>Überblick</h2>
+<table>
+<tr><th>Basis-URL</th><td><code>https://www.parlament.gv.at</code></td></tr>
+<tr><th>Authentifizierung</th><td>keine</td></tr>
+<tr><th>Format</th><td>JSON (UTF-8)</td></tr>
+<tr><th>Abdeckung</th><td>ab der XX. GP (BR-Abruf ohne GP-Filter liefert zusätzlich Zeilen aus XIX und V)</td></tr>
+<tr><th>Aktualität</th><td>Feld <code>lastSync</code> in jeder Antwort. Die Zeilen tragen einen nächtlichen <code>sysdate</code>.</td></tr>
+<tr><th>Lizenz</th><td>Ergebnislisten und Geschichtsseiten: CC BY 4.0. Nicht freigegeben: Titel, Kurzbeschreibung, Dokumente und Volltexte, Porträts.</td></tr>
+</table>
+
+<h2>Endpunkte</h2>
+
+<details class="op" open>
+<summary><span class="m POST">POST</span><span class="path">/Filter/api/filter/data/101</span><span class="sum">Ergebnisliste der Filtersuche</span></summary>
+<div class="body">
+<p>Liefert alle Anfragen, die zu den Filtern passen. Dimensionen werden mit <b>UND</b> verknüpft, Ausprägungen innerhalb einer Dimension mit <b>ODER</b>. Mit <code>showAll=true</code> kommt alles in einer Antwort (<code>pages</code> = 1).</p>
+
+<h3>Query-Parameter</h3>
+<table>
+<tr><th>Name</th><th>Wert</th><th>Beschreibung</th></tr>
+<tr><td><code>js</code><span class="r">*</span></td><td><code>eval</code></td><td>fix</td></tr>
+<tr><td><code>showAll</code><span class="r">*</span></td><td><code>true</code></td><td>alle Treffer in einer Antwort</td></tr>
+</table>
+
+<h3>Request-Body (JSON)</h3>
+<p>Objekt mit Dimensionscodes als Schlüssel und Arrays von Ausprägungen als Werte.</p>
+<table>
+<tr><th>Dimension</th><th>Bedeutung</th><th>Ausprägungen</th></tr>
+<tr><td><code>NRBR</code></td><td>Gremium</td><td><code>NR</code>, <code>BR</code></td></tr>
+<tr><td><code>GP_CODE</code></td><td>Gesetzgebungsperiode</td><td>römisch, z. B. <code>XXVIII</code></td></tr>
+<tr><td><code>DATUM_VON</code></td><td>Zeitraum (Start, Ende)</td><td><code>dd.mm.yyyy</code></td></tr>
+<tr><td><code>VHG</code></td><td>Gegenstand</td><td>NR: <code>J_JPR_M</code> · BR: <code>J_JPR_M-BR</code></td></tr>
+<tr><td><code>DOKTYP</code></td><td>Art der Anfrage (nur NR, zusammen mit <code>VHG</code>)</td><td><code>J</code> Anfrage, <code>JPR</code> an Präsidium bzw. Ausschussvorsitz</td></tr>
+<tr><td><code>VHG2</code></td><td>Adressat-Art (BR: zusammen mit <code>VHG</code>)</td><td>NR: <code>JMIN</code>, <code>JPRPR</code>, <code>JRH</code><span class="pill no">Doku fehlt</span>, <code>JPRAUS</code><span class="pill no">Doku fehlt</span> · BR: <code>JMIN-BR</code>, <code>JPRPR-BR</code>, <code>M-BR</code> (mündlich)</td></tr>
+<tr><td><code>THEMEN</code></td><td>Themenbereich</td><td>20 feste Werte (Arbeit, Außenpolitik, Bildung, Budget und Finanzen, Europäische Union, Familie und Generationen, Frauen und Gleichbehandlung, Gesundheit und Ernährung, Information und Medien, Inneres und Recht, Innovation, Technologie und Forschung, Klima, Umwelt und Energie, Kultur, Land- und Forstwirtschaft, Landesverteidigung, Parlament und Demokratie, Soziales, Sport, Verkehr und Infrastruktur, Wirtschaft)</td></tr>
+<tr><td><code>FRAK_CODE</code></td><td>Klub/Fraktion</td><td><code>T</code> Stronach, <code>F</code> FPÖ/F-BZÖ, <code>B</code> BZÖ, <code>G</code> Grüne, <code>V</code> ÖVP, <code>N</code> NEOS/NEOS-LIF, <code>L</code> LIF, <code>J</code> JETZT, <code>P</code> PILZ, <code>S</code> SPÖ, <code>A</code> ohne Klub</td></tr>
+<tr><td><code>PAD_INTERN</code></td><td>Person (Einbringer:in)</td><td>Personen-ID aus „Parlamentarier:innen seit 1918“</td></tr>
+<tr><td><code>INRNUM</code>, <code>SW</code>, <code>EUROVOC</code></td><td>Nummer, Schlagwort, EuroVoc</td><td>zu viele Werte; über die grafische Filtersuche ermitteln</td></tr>
+</table>
+<div class="note warn">Die BR-Doku nennt im Beispiel <code>VHG2: JMIN</code>, in der Dimensionsliste aber <code>JMIN-BR</code>. In den gelieferten Daten steht <code>JMIN-BR</code>.</div>
+
+<h3>Ausprobieren: Request-Body bearbeiten</h3>
+<p>Body anpassen, der curl-Befehl darunter wird live erzeugt. Die Seite darf selbst keine Abrufe machen, den Befehl also im Terminal ausführen.</p>
+<div style="margin:6px 0">
+<button class="preset" data-b='{"GP_CODE":["XXVIII"],"VHG":["J_JPR_M"],"DOKTYP":["J"]}'>NR, XXVIII. GP</button>
+<button class="preset" data-b='{"GP_CODE":["XXVI"],"VHG":["J_JPR_M"],"DOKTYP":["J"],"FRAK_CODE":["V"]}'>NR, ÖVP, XXVI. GP</button>
+<button class="preset" data-b='{"NRBR":["BR"],"GP_CODE":["XXVIII"],"VHG":["J_JPR_M-BR"]}'>BR, XXVIII. GP</button>
+<button class="preset" data-b='{"GP_CODE":["XXVIII"],"VHG":["J_JPR_M"],"DOKTYP":["J"],"THEMEN":["Gesundheit und Ernährung"],"DATUM_VON":["01.01.2026","30.06.2026"]}'>NR, Thema + Zeitraum</button>
+</div>
+<textarea id="body" spellcheck="false" rows="7">{
+  "GP_CODE": ["XXVIII"],
+  "VHG": ["J_JPR_M"],
+  "DOKTYP": ["J"]
+}</textarea>
+<div id="state" class="state"></div>
+<pre><button class="copy" id="copycurl">Kopieren</button><code id="curl"></code></pre>
+
+<h3>Antwort 200</h3>
+<table>
+<tr><th>Feld</th><th>Typ</th><th>Beschreibung</th></tr>
+<tr><td><code>pages</code></td><td>integer</td><td>Seitenzahl (mit <code>showAll</code> immer 1)</td></tr>
+<tr><td><code>lastSync</code></td><td>string</td><td>Zeitpunkt des letzten Datensync, z. B. <code>2026-11-16 08:27:22.0</code></td></tr>
+<tr><td><code>count</code></td><td>integer</td><td>Anzahl Treffer</td></tr>
+<tr><td><code>header</code></td><td>array</td><td>36 Spaltenbeschreibungen (<code>rnr</code>, <code>label</code>, <code>hidden</code>, …). Die Doku nennt 30.</td></tr>
+<tr><td><code>rows</code></td><td>array von arrays</td><td>positionsbasierte Werte in Reihenfolge von <code>header</code>. Einzelne Zeilen können kürzer sein.</td></tr>
+</table>
+
+<h3>Spalten in <code>rows</code> (beobachtet)</h3>
+<table>
+<tr><th>Pos.</th><th>Label</th><th>Inhalt</th></tr>
+<tr><td>1</td><td><code>GP_CODE</code></td><td>Gesetzgebungsperiode, römisch (BR: ebenfalls GP)</td></tr>
+<tr><td>2</td><td><code>ITYP</code></td><td>Typ: <code>J</code>, <code>JPR</code>, <code>J-BR</code>, <code>M-BR</code></td></tr>
+<tr><td>3</td><td><code>INR</code></td><td>Nummer (String)</td></tr>
+<tr><td>4</td><td><code>ZUKZ</code></td><td>Zusatzkennzeichen, immer <code>null</code></td></tr>
+<tr><td>5</td><td><code>Datum</code></td><td>Datum, <code>dd.mm.yyyy</code></td></tr>
+<tr><td>6</td><td><code>Art</code></td><td>Art des Gegenstands (wie <code>DOKTYP</code>)</td></tr>
+<tr><td>7</td><td><code>Betreff</code> <span class="pill no">nicht Open Data</span></td><td>Titel inkl. „beantwortet durch N/AB (Klub)“. Laut Doku nicht zur Weiterverwendung freigegeben, wird aber geliefert.</td></tr>
+<tr><td>8</td><td><code>Nummer</code></td><td>Zitation, z. B. <code>4483/J</code>, BR: <code>4265/J-BR/2024</code></td></tr>
+<tr><td>9</td><td><code>DATUMSORT</code></td><td><code>yyyymmdd</code>, technisch</td></tr>
+<tr><td>10</td><td><code>PHASEN_BIS</code></td><td>mögliche Phasen, z. B. <code>05</code></td></tr>
+<tr><td>11</td><td><code>Status</code></td><td>aktuelle Phase: <code>5</code> abgeschlossen, <code>3</code> offen (abgeleitet aus den Daten, nicht dokumentiert). 5 heißt nicht zwingend „beantwortet“ (auch Dringliche und zurückgezogene).</td></tr>
+<tr><td>12</td><td><code>DOKTYP</code></td><td>Dokumenttyp</td></tr>
+<tr><td>13</td><td><code>Zust?</code></td><td>Zustimmung möglich, bei Anfragen immer <code>N</code></td></tr>
+<tr><td>14</td><td><code>DOKTYP_LANG</code></td><td>Langform, z. B. „Schriftliche Anfrage“</td></tr>
+<tr><td>15</td><td><code>HIS_URL</code></td><td>relativer Link zur Geschichtsseite, z. B. <code>/gegenstand/XXVIII/J/4483</code></td></tr>
+<tr><td>16</td><td><code>RSS_DESC</code></td><td>RSS-Beschreibung (in Beobachtung <code>null</code>)</td></tr>
+<tr><td>17</td><td><code>DATUM_VON</code></td><td>Datum, ISO (Doku: <code>null</code>, real befüllt)</td></tr>
+<tr><td>18</td><td><code>VHG</code></td><td>Gegenstand-Code</td></tr>
+<tr><td>19</td><td><code>VHG2</code></td><td>Adressat-Art</td></tr>
+<tr><td>20</td><td><code>LZ-Buttons</code></td><td>HTML (Lesezeichen), kein Open Data</td></tr>
+<tr><td>21</td><td><code>Personen</code></td><td>JSON-Array als String mit Personen-IDs: Einbringer (je Klub eine Person) plus Adressat</td></tr>
+<tr><td>22</td><td><code>Fraktionen</code></td><td>JSON-Array als String. Labels uneinheitlich: <code>FPÖ</code> und <code>F</code>, <code>OK</code>, <code>STRONACH</code>, <code>NEOS-LIF</code> u. a.; BR zusätzlich <code>OF</code></td></tr>
+<tr><td>23</td><td><code>THEMEN</code></td><td>JSON-Array als String</td></tr>
+<tr><td>24</td><td><code>SW</code></td><td>Schlagwörter, JSON-Array als String</td></tr>
+<tr><td>25</td><td><code>EUROVOC</code></td><td>EuroVoc, JSON-Array als String</td></tr>
+<tr><td>26</td><td><code>sysdate???</code></td><td>Zeitstempel des Syncs, technisch</td></tr>
+<tr><td>27</td><td><code>WENTRY_ID</code></td><td>technische ID</td></tr>
+<tr><td>28</td><td><code>INRNUM</code></td><td>Nummer als Zahl</td></tr>
+<tr><td>29</td><td><code>NR_GP_CODE</code></td><td>GP</td></tr>
+<tr><td>30</td><td><code>NRBR</code></td><td><code>NR</code> oder <code>BR</code></td></tr>
+<tr><td>31–36</td><td><code>Gruppe</code>, <code>Abstimmung 3. Lesung</code>, <code>Dafür</code>, <code>Dagegen</code>, <code>Abstimmungstext</code>, <code>Abstimmungskommentar</code></td><td>bei Anfragen leer</td></tr>
+</table>
+
+<h3>Beispielzeile (gekürzt)</h3>
+<pre><code>["XXVIII","J","4483",null,"12.01.2026","J","<i>Betreff nicht Open Data</i>","4483/J","20260112","05","5","J","N",
+ "Schriftliche Anfrage","/gegenstand/XXVIII/J/4483",null,"2026-01-12T00:00:00","J_JPR_M","JMIN",
+ "&lt;button&gt;…&lt;/button&gt;","[\"32506\",\"64022\"]","[\"FPÖ\"]","[\"Inneres und Recht\"]",
+ "[…Schlagwörter…]","[…EuroVoc…]","Mon Nov 16 02:02:19 CET 2026",28802982,4483,"XXVIII","NR",null,null,null,null,null,null]</code></pre>
+</div>
+</details>
+
+<details class="op">
+<summary><span class="m GET">GET</span><span class="path">/gegenstand/{gp}/{ityp}/{inr}?json=true</span><span class="sum">Detailseite (Geschichtsseite)</span></summary>
+<div class="body">
+<p>Liefert die Geschichtsseite einer Anfrage als JSON: Verfahrensstufen, Beteiligte, Themen. Der Parameter <code>json=true</code> steht nicht in der Datensatzdoku (dort: Aufrufweg nicht dokumentiert), funktioniert aber. Den Pfad liefert <code>HIS_URL</code> aus der Ergebnisliste.</p>
+
+<h3>Parameter</h3>
+<table>
+<tr><th>Name</th><th>in</th><th>Beschreibung</th></tr>
+<tr><td><code>gp</code><span class="r">*</span></td><td>path</td><td>römisch, z. B. <code>XXVIII</code>; im BR <code>BR</code></td></tr>
+<tr><td><code>ityp</code><span class="r">*</span></td><td>path</td><td><code>J</code>, <code>JPR</code>, <code>J-BR</code>, <code>JPR-BR</code>, <code>M-BR</code></td></tr>
+<tr><td><code>inr</code><span class="r">*</span></td><td>path</td><td>Nummer</td></tr>
+<tr><td><code>json</code><span class="r">*</span></td><td>query</td><td><code>true</code></td></tr>
+</table>
+
+<h3>Beispiel</h3>
+<pre><button class="copy">Kopieren</button><code>curl -s 'https://www.parlament.gv.at/gegenstand/XXVIII/J/4483?json=true'
+curl -s 'https://www.parlament.gv.at/gegenstand/BR/J-BR/4265?json=true'</code></pre>
+
+<h3>Antwort 200: <code>content</code></h3>
+<table>
+<tr><th>Feld</th><th>Beschreibung</th></tr>
+<tr><td><code>zitation</code>, <code>gp_code</code>, <code>ityp</code>, <code>inr</code>, <code>doktyp</code></td><td>Identifikation der Anfrage</td></tr>
+<tr><td><code>einlangen</code></td><td>Datum des Einlangens (ISO)</td></tr>
+<tr><td><code>update</code></td><td>Zeitpunkt des letzten Datenupdates</td></tr>
+<tr><td><code>deleted</code></td><td>Löschkennzeichen</td></tr>
+<tr><td><code>vhg_fertig</code>, <code>vhg_fertig_docs</code>, <code>process</code></td><td>Status-Flags (<code>J</code>/<code>N</code>)</td></tr>
+<tr><td><code>stages[]</code></td><td>Verfahrensstufen: <code>date</code> (<code>dd.mm.yyyy</code>), <code>text</code> (kann HTML-Links enthalten, z. B. „Einlangen im Nationalrat (Frist: …)“, „Schriftliche Beantwortung (…/AB)“), <code>priority</code>, optional <code>fsth</code> (Protokollstellen)</td></tr>
+<tr><td><code>names[]</code></td><td>Beteiligte: <code>funktext</code> („Eingebracht von“, „Eingebracht an“), <code>name</code>, <code>frak_code</code>, <code>url</code> (<code>/person/{id}</code>), <code>ltext</code> (Funktion, nur Adressat:in). Bei Rechnungshof-Anfragen weicht <code>funktext</code> beim Adressaten ab. <code>portrait</code> ist nicht Open Data.</td></tr>
+<tr><td><code>topics</code>, <code>headwords</code>, <code>eurovoc</code></td><td><code>bubbles</code> mit <code>label</code> und <code>link</code></td></tr>
+<tr><td><code>documents</code></td><td>Dokumentgruppen (PDF/HTML), nicht Open Data</td></tr>
+<tr><td><code>title</code>, <code>description</code></td><td>nicht Open Data</td></tr>
+<tr><td><code>statementsstate</code>, <code>approvalstate</code>, <code>intranet</code>, <code>group</code>, <code>history_ind</code></td><td>technisch</td></tr>
+</table>
+</div>
+</details>
+
+<h2>Hinweise für die Nutzung</h2>
+<ul>
+<li><b>Fehlerbehandlung:</b> Fehlercodes sind nicht dokumentiert. Auf HTTP-Status prüfen und <code>count</code> mit <code>rows.length</code> abgleichen.</li>
+<li><b>Höflich abrufen:</b> Rate Limits sind unbekannt. Eigener User-Agent mit Kontakt, wenige parallele Abrufe, Backoff.</li>
+<li><b>Namensschemata:</b> NR-Nummern laufen je GP und Typ ab 1. Im BR laufen sie je Typ (<code>J-BR</code>, <code>M-BR</code>) über GP-Grenzen durch.</li>
+<li><b>Klub-Labels harmonisieren:</b> Für Zeitreihen eine Mapping-Tabelle (<code>F</code> → FPÖ usw.) verwenden.</li>
+<li><b>Titel nicht weiterverwenden:</b> <code>Betreff</code> wird mitgeliefert, ist aber laut Doku nicht freigegeben.</li>
+</ul>
+
+<h2>OpenAPI-Spezifikation</h2>
+<p>Maschinenlesbare Fassung zum Einfügen in <a href="https://editor.swagger.io" rel="noopener">editor.swagger.io</a> oder ein anderes OpenAPI-Werkzeug.</p>
+<details class="op"><summary><span class="m GET" style="background:var(--blau)">YAML</span><span class="path">openapi.yaml</span><span class="sum">aufklappen</span></summary>
+<div class="body"><pre><button class="copy">Kopieren</button><code id="yaml">openapi: 3.0.3
+info:
+  title: Parlament Österreich – Schriftliche Anfragen (NR &amp; BR)
+  version: &quot;2026-11-16 (beobachtet)&quot;
+  description: |
+    Inoffizielle, aus Beobachtung erstellte Beschreibung der Open-Data-Schnittstelle des
+    österreichischen Parlaments für schriftliche Anfragen (Nationalrat und Bundesrat).
+    Grundlage: Datensatzdokumentation auf parlament.gv.at und Abruf der Schnittstelle am 16.11.2026.
+    Wo Doku und Realität abweichen, gilt hier die Beobachtung (siehe x-doku-abweichung).
+    Lizenz der Daten: CC BY 4.0. Titel, Kurzbeschreibung, Dokumente/Volltexte und Porträts sind
+    nicht zur Weiterverwendung freigegeben.
+  license:
+    name: CC BY 4.0 (Daten)
+    url: https://creativecommons.org/licenses/by/4.0/deed.de
+servers:
+  - url: https://www.parlament.gv.at
+paths:
+  /Filter/api/filter/data/101:
+    post:
+      summary: Ergebnisliste der Filtersuche (Anfragen NR und BR)
+      description: |
+        Liefert alle Anfragen, die zu den Filtern passen. Dimensionen werden mit UND verknüpft,
+        Ausprägungen innerhalb einer Dimension mit ODER. Mit `showAll=true` kommt alles in einer
+        Antwort (`pages` = 1). Die Zeilen sind positionsbasiert, die Spaltennamen stehen in `header`.
+      operationId: filterAnfragen
+      parameters:
+        - name: js
+          in: query
+          required: true
+          schema: { type: string, enum: [eval] }
+        - name: showAll
+          in: query
+          required: true
+          schema: { type: boolean, enum: [true] }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: &#x27;#/components/schemas/FilterBody&#x27;
+            examples:
+              nr_oevp_xxvi:
+                summary: NR, ÖVP, XXVI. GP
+                value: { GP_CODE: [XXVI], VHG: [J_JPR_M], DOKTYP: [J], FRAK_CODE: [V] }
+              br_xxviii:
+                summary: BR, XXVIII. GP
+                value: { NRBR: [BR], GP_CODE: [XXVIII], VHG: [J_JPR_M-BR] }
+      responses:
+        &#x27;200&#x27;:
+          description: Ergebnisliste
+          content:
+            application/json:
+              schema:
+                $ref: &#x27;#/components/schemas/FilterResponse&#x27;
+  /gegenstand/{gp}/{ityp}/{inr}:
+    get:
+      summary: Detailseite (Geschichtsseite) einer Anfrage als JSON
+      description: |
+        Mit `?json=true` liefert die Geschichtsseite den Inhalt als JSON. Der Parameter ist in der
+        Datensatzdoku nicht dokumentiert (Doku: „Aufrufweg nicht dokumentiert“), funktioniert aber.
+        Für den BR lautet der Pfad `/gegenstand/BR/{ityp}/{inr}` (z. B. `/gegenstand/BR/J-BR/4265`).
+      operationId: detailAnfrage
+      parameters:
+        - { name: gp, in: path, required: true, schema: { type: string }, description: &#x27;Römisch (XXVIII) oder BR&#x27;, example: XXVIII }
+        - { name: ityp, in: path, required: true, schema: { type: string, enum: [J, JPR, J-BR, JPR-BR, M-BR] }, example: J }
+        - { name: inr, in: path, required: true, schema: { type: integer }, example: 4483 }
+        - { name: json, in: query, required: true, schema: { type: boolean, enum: [true] } }
+      responses:
+        &#x27;200&#x27;:
+          description: Geschichtsseite
+          content:
+            application/json:
+              schema:
+                $ref: &#x27;#/components/schemas/Geschichtsseite&#x27;
+components:
+  schemas:
+    FilterBody:
+      type: object
+      description: Schlüssel sind Dimensionscodes, Werte Arrays von Ausprägungen.
+      properties:
+        NRBR: { type: array, items: { type: string, enum: [NR, BR] }, description: Gremium }
+        GP_CODE: { type: array, items: { type: string }, description: &#x27;Gesetzgebungsperiode, römisch (XX … XXVIII)&#x27; }
+        DATUM_VON: { type: array, items: { type: string }, description: &#x27;Zeitraum, Format dd.mm.yyyy (Start und Ende)&#x27; }
+        VHG: { type: array, items: { type: string, enum: [J_JPR_M, J_JPR_M-BR] }, description: &#x27;Gegenstand. NR: J_JPR_M, BR: J_JPR_M-BR&#x27; }
+        DOKTYP: { type: array, items: { type: string, enum: [J, JPR] }, description: &#x27;Nur NR. Zusammen mit VHG verwenden.&#x27; }
+        VHG2: { type: array, items: { type: string, enum: [JMIN, JPRPR, JRH, JPRAUS, JMIN-BR, JPRPR-BR] }, description: &#x27;Art der Anfrage (Adressat). JRH und JPRAUS sind in der Doku nicht beschrieben.&#x27; }
+        THEMEN: { type: array, items: { type: string }, description: &#x27;20 feste Themenbereiche&#x27; }
+        FRAK_CODE: { type: array, items: { type: string, enum: [T, F, B, G, V, N, L, J, P, S, A] }, description: &#x27;Klub/Fraktion (Codes laut Doku)&#x27; }
+        PAD_INTERN: { type: array, items: { type: string }, description: &#x27;Personen-ID (Datensatz Parlamentarier:innen seit 1918)&#x27; }
+        INRNUM: { type: array, items: { type: string }, description: Nummer der Anfrage }
+        SW: { type: array, items: { type: string }, description: Schlagwort }
+        EUROVOC: { type: array, items: { type: string }, description: EuroVoc-Deskriptor }
+    FilterResponse:
+      type: object
+      properties:
+        pages: { type: integer }
+        lastSync: { type: string, description: &#x27;Zeitpunkt des letzten Datensync, z. B. 2026-11-16 08:27:22.0&#x27; }
+        count: { type: integer }
+        header:
+          type: array
+          description: Spaltenbeschreibung, 36 Einträge (Doku nennt 30)
+          items:
+            type: object
+            properties:
+              feldId: { type: integer }
+              rnr: { type: integer, description: Position 1 bis 36 }
+              label: { type: string }
+              hidden: { type: boolean }
+        rows:
+          type: array
+          items:
+            type: array
+            description: Werte in der Reihenfolge von `header`; einzelne Zeilen können kürzer sein
+            items: {}
+    Geschichtsseite:
+      type: object
+      properties:
+        pagetype: { type: string, enum: [geschichtsseite] }
+        meta: { type: object }
+        content:
+          type: object
+          properties:
+            zitation: { type: string, example: 4483/J }
+            gp_code: { type: string }
+            ityp: { type: string }
+            inr: { type: string }
+            doktyp: { type: string }
+            update: { type: string, format: date-time }
+            einlangen: { type: string, format: date-time }
+            deleted: { type: boolean }
+            vhg_fertig: { type: string, enum: [J, N] }
+            vhg_fertig_docs: { type: string, enum: [J, N] }
+            process: { type: string }
+            stages:
+              type: array
+              items:
+                type: object
+                properties:
+                  date: { type: string, description: dd.mm.yyyy }
+                  text: { type: string, description: &#x27;Kann HTML-Links enthalten, z. B. „Einlangen im Nationalrat (Frist: …)“&#x27; }
+                  priority: { type: integer }
+                  fsth: { type: array, items: { type: object } }
+            documents: { type: array, items: { type: object }, description: &#x27;Nicht Open Data (Dokumente/Volltexte)&#x27; }
+            names:
+              type: array
+              items:
+                type: object
+                properties:
+                  funktext: { type: string, description: &#x27;„Eingebracht von“, „Eingebracht an“; bei Rechnungshof-Anfragen abweichend&#x27; }
+                  name: { type: string }
+                  frak_code: { type: string }
+                  ltext: { type: string, description: Funktionsbezeichnung (nur Adressat:innen) }
+                  url: { type: string, example: /person/64022 }
+                  portrait: { type: object, description: Nicht Open Data }
+            topics: { type: object, description: &#x27;bubbles mit label und link&#x27; }
+            headwords: { type: object }
+            eurovoc: { type: object }
+</code></pre></div>
+</details>
+
+</main>
+<footer>Quellen: Datensatzdokumentation NR und BR auf parlament.gv.at, Beobachtung der Schnittstelle am 16.11.2026. Inoffiziell, ohne Gewähr.</footer>
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(e){
+    e.preventDefault();
+    var t=b.parentElement.querySelector('code').innerText;
+    var done=function(){var o=b.textContent;b.textContent='Kopiert';setTimeout(function(){b.textContent=o},1200)};
+    try{navigator.clipboard.writeText(t).then(done,function(){})}catch(x){}
+  });
+});
+
+(function(){
+  var ta=document.getElementById('body'),cu=document.getElementById('curl'),st=document.getElementById('state');
+  var URL="https://www.parlament.gv.at/Filter/api/filter/data/101?js=eval&showAll=true";
+  function upd(){
+    var s=ta.value.trim(),o;
+    try{o=JSON.parse(s)}catch(e){st.className='state bad';st.textContent='Kein gültiges JSON: '+e.message;return}
+    var bad=[];
+    if(o===null||typeof o!=='object'||Array.isArray(o))bad.push('Body muss ein Objekt sein');
+    else Object.keys(o).forEach(function(k){if(!Array.isArray(o[k]))bad.push(k+' muss ein Array sein')});
+    if(bad.length){st.className='state bad';st.textContent=bad.join('; ');return}
+    st.className='state ok';st.textContent='Gültig: '+Object.keys(o).length+' Dimension(en)';
+    cu.textContent="curl -s -X POST '"+URL+"' \\\n  -H 'Content-Type: application/json' \\\n  -d '"+JSON.stringify(o).replace(/'/g,"'\\''")+"'";
+  }
+  ta.addEventListener('input',upd);
+  document.querySelectorAll('.preset').forEach(function(b){b.addEventListener('click',function(){
+    ta.value=JSON.stringify(JSON.parse(b.getAttribute('data-b')),null,2);upd();});});
+  upd();
+})();
+</script>
+</body>
+</html>

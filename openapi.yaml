@@ -1,0 +1,157 @@
+openapi: 3.0.3
+info:
+  title: Parlament Österreich – Schriftliche Anfragen (NR & BR)
+  version: "2026-11-16 (beobachtet)"
+  description: |
+    Inoffizielle, aus Beobachtung erstellte Beschreibung der Open-Data-Schnittstelle des
+    österreichischen Parlaments für schriftliche Anfragen (Nationalrat und Bundesrat).
+    Grundlage: Datensatzdokumentation auf parlament.gv.at und Abruf der Schnittstelle am 16.11.2026.
+    Wo Doku und Realität abweichen, gilt hier die Beobachtung (siehe x-doku-abweichung).
+    Lizenz der Daten: CC BY 4.0. Titel, Kurzbeschreibung, Dokumente/Volltexte und Porträts sind
+    nicht zur Weiterverwendung freigegeben.
+  license:
+    name: CC BY 4.0 (Daten)
+    url: https://creativecommons.org/licenses/by/4.0/deed.de
+servers:
+  - url: https://www.parlament.gv.at
+paths:
+  /Filter/api/filter/data/101:
+    post:
+      summary: Ergebnisliste der Filtersuche (Anfragen NR und BR)
+      description: |
+        Liefert alle Anfragen, die zu den Filtern passen. Dimensionen werden mit UND verknüpft,
+        Ausprägungen innerhalb einer Dimension mit ODER. Mit `showAll=true` kommt alles in einer
+        Antwort (`pages` = 1). Die Zeilen sind positionsbasiert, die Spaltennamen stehen in `header`.
+      operationId: filterAnfragen
+      parameters:
+        - name: js
+          in: query
+          required: true
+          schema: { type: string, enum: [eval] }
+        - name: showAll
+          in: query
+          required: true
+          schema: { type: boolean, enum: [true] }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilterBody'
+            examples:
+              nr_oevp_xxvi:
+                summary: NR, ÖVP, XXVI. GP
+                value: { GP_CODE: [XXVI], VHG: [J_JPR_M], DOKTYP: [J], FRAK_CODE: [V] }
+              br_xxviii:
+                summary: BR, XXVIII. GP
+                value: { NRBR: [BR], GP_CODE: [XXVIII], VHG: [J_JPR_M-BR] }
+      responses:
+        '200':
+          description: Ergebnisliste
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilterResponse'
+  /gegenstand/{gp}/{ityp}/{inr}:
+    get:
+      summary: Detailseite (Geschichtsseite) einer Anfrage als JSON
+      description: |
+        Mit `?json=true` liefert die Geschichtsseite den Inhalt als JSON. Der Parameter ist in der
+        Datensatzdoku nicht dokumentiert (Doku: „Aufrufweg nicht dokumentiert“), funktioniert aber.
+        Für den BR lautet der Pfad `/gegenstand/BR/{ityp}/{inr}` (z. B. `/gegenstand/BR/J-BR/4265`).
+      operationId: detailAnfrage
+      parameters:
+        - { name: gp, in: path, required: true, schema: { type: string }, description: 'Römisch (XXVIII) oder BR', example: XXVIII }
+        - { name: ityp, in: path, required: true, schema: { type: string, enum: [J, JPR, J-BR, JPR-BR, M-BR] }, example: J }
+        - { name: inr, in: path, required: true, schema: { type: integer }, example: 4483 }
+        - { name: json, in: query, required: true, schema: { type: boolean, enum: [true] } }
+      responses:
+        '200':
+          description: Geschichtsseite
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Geschichtsseite'
+components:
+  schemas:
+    FilterBody:
+      type: object
+      description: Schlüssel sind Dimensionscodes, Werte Arrays von Ausprägungen.
+      properties:
+        NRBR: { type: array, items: { type: string, enum: [NR, BR] }, description: Gremium }
+        GP_CODE: { type: array, items: { type: string }, description: 'Gesetzgebungsperiode, römisch (XX … XXVIII)' }
+        DATUM_VON: { type: array, items: { type: string }, description: 'Zeitraum, Format dd.mm.yyyy (Start und Ende)' }
+        VHG: { type: array, items: { type: string, enum: [J_JPR_M, J_JPR_M-BR] }, description: 'Gegenstand. NR: J_JPR_M, BR: J_JPR_M-BR' }
+        DOKTYP: { type: array, items: { type: string, enum: [J, JPR] }, description: 'Nur NR. Zusammen mit VHG verwenden.' }
+        VHG2: { type: array, items: { type: string, enum: [JMIN, JPRPR, JRH, JPRAUS, JMIN-BR, JPRPR-BR] }, description: 'Art der Anfrage (Adressat). JRH und JPRAUS sind in der Doku nicht beschrieben.' }
+        THEMEN: { type: array, items: { type: string }, description: '20 feste Themenbereiche' }
+        FRAK_CODE: { type: array, items: { type: string, enum: [T, F, B, G, V, N, L, J, P, S, A] }, description: 'Klub/Fraktion (Codes laut Doku)' }
+        PAD_INTERN: { type: array, items: { type: string }, description: 'Personen-ID (Datensatz Parlamentarier:innen seit 1918)' }
+        INRNUM: { type: array, items: { type: string }, description: Nummer der Anfrage }
+        SW: { type: array, items: { type: string }, description: Schlagwort }
+        EUROVOC: { type: array, items: { type: string }, description: EuroVoc-Deskriptor }
+    FilterResponse:
+      type: object
+      properties:
+        pages: { type: integer }
+        lastSync: { type: string, description: 'Zeitpunkt des letzten Datensync, z. B. 2026-11-16 08:27:22.0' }
+        count: { type: integer }
+        header:
+          type: array
+          description: Spaltenbeschreibung, 36 Einträge (Doku nennt 30)
+          items:
+            type: object
+            properties:
+              feldId: { type: integer }
+              rnr: { type: integer, description: Position 1 bis 36 }
+              label: { type: string }
+              hidden: { type: boolean }
+        rows:
+          type: array
+          items:
+            type: array
+            description: Werte in der Reihenfolge von `header`; einzelne Zeilen können kürzer sein
+            items: {}
+    Geschichtsseite:
+      type: object
+      properties:
+        pagetype: { type: string, enum: [geschichtsseite] }
+        meta: { type: object }
+        content:
+          type: object
+          properties:
+            zitation: { type: string, example: 4483/J }
+            gp_code: { type: string }
+            ityp: { type: string }
+            inr: { type: string }
+            doktyp: { type: string }
+            update: { type: string, format: date-time }
+            einlangen: { type: string, format: date-time }
+            deleted: { type: boolean }
+            vhg_fertig: { type: string, enum: [J, N] }
+            vhg_fertig_docs: { type: string, enum: [J, N] }
+            process: { type: string }
+            stages:
+              type: array
+              items:
+                type: object
+                properties:
+                  date: { type: string, description: dd.mm.yyyy }
+                  text: { type: string, description: 'Kann HTML-Links enthalten, z. B. „Einlangen im Nationalrat (Frist: …)“' }
+                  priority: { type: integer }
+                  fsth: { type: array, items: { type: object } }
+            documents: { type: array, items: { type: object }, description: 'Nicht Open Data (Dokumente/Volltexte)' }
+            names:
+              type: array
+              items:
+                type: object
+                properties:
+                  funktext: { type: string, description: '„Eingebracht von“, „Eingebracht an“; bei Rechnungshof-Anfragen abweichend' }
+                  name: { type: string }
+                  frak_code: { type: string }
+                  ltext: { type: string, description: Funktionsbezeichnung (nur Adressat:innen) }
+                  url: { type: string, example: /person/64022 }
+                  portrait: { type: object, description: Nicht Open Data }
+            topics: { type: object, description: 'bubbles mit label und link' }
+            headwords: { type: object }
+            eurovoc: { type: object }

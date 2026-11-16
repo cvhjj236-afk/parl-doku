@@ -1,0 +1,8 @@
+# API-Doku: Schriftliche Anfragen (Parlament Österreich)
+
+> Inoffizielle Beschreibung der Open-Data-Schnittstelle des österreichischen Parlaments für schriftliche Anfragen im Nationalrat (NR) und Bundesrat (BR). Stand 16.11.2026, aus Beobachtung der Schnittstelle. Daten: CC BY 4.0.
+
+- [OpenAPI-Spezifikation](/openapi.yaml): maschinenlesbar, 2 Endpunkte (POST Filter-API Liste 101, GET Detailseite mit ?json=true)
+- [Doku-Seite](/): Dimensionen, Spalten der Ergebnisliste, Beispiele, Hinweise
+
+Hinweise: Titel (Feld "Betreff"), Kurzbeschreibung, Dokumente und Porträts sind nicht Open Data und dürfen nicht weiterverwendet werden. Klub-Labels sind uneinheitlich (z. B. F und FPÖ). Status 5 bedeutet abgeschlossen, nicht zwingend beantwortet.
