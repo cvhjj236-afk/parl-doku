@@ -1,8 +1,21 @@
-# API-Doku: Schriftliche Anfragen (Parlament Österreich)
+# Parlaments-Daten: API-Doku (inoffiziell)
 
-> Inoffizielle Beschreibung der Open-Data-Schnittstelle des österreichischen Parlaments für schriftliche Anfragen im Nationalrat (NR) und Bundesrat (BR). Stand 16.11.2026, aus Beobachtung der Schnittstelle. Daten: CC BY 4.0.
+> Inoffizielle Doku der Open-Data-Schnittstelle des österreichischen Parlaments: schriftliche Anfragen (NR, BR), Regierungsvorlagen, Anträge und Gesetzesanträge des Bundesrats. Stand 16.11.2026, aus Beobachtung der Schnittstelle. Nicht vom Parlament. Daten: CC BY 4.0.
 
-- [OpenAPI-Spezifikation](/openapi.yaml): maschinenlesbar, 2 Endpunkte (POST Filter-API Liste 101, GET Detailseite mit ?json=true)
-- [Doku-Seite](/): Dimensionen, Spalten der Ergebnisliste, Beispiele, Hinweise
+Ein Endpunkt für alle Datensätze: POST https://www.parlament.gv.at/Filter/api/filter/data/101?js=eval&showAll=true, der Datensatz wird über den Filter VHG gewählt. Detailseiten: GET /gegenstand/{gp}/{ityp}/{inr}?json=true.
 
-Hinweise: Titel (Feld "Betreff"), Kurzbeschreibung, Dokumente und Porträts sind nicht Open Data und dürfen nicht weiterverwendet werden. Klub-Labels sind uneinheitlich (z. B. F und FPÖ). Status 5 bedeutet abgeschlossen, nicht zwingend beantwortet.
+## Seiten
+- [Übersicht](/): Überblick, Hinweise, Lizenz
+- [Schriftliche Anfragen](/schriftliche-anfragen/): VHG J_JPR_M (NR), J_JPR_M-BR (BR)
+- [Regierungsvorlagen](/regierungsvorlagen/): VHG RV
+- [Anträge](/antraege/): VHG ANTR (NR), ANTR-BR (BR; die Parlamentsdoku nennt fälschlich ANTR)
+- [Gesetzesanträge des BR](/gesetzesantraege-br/): VHG GABR, GABR13 mit NRBR=NR
+- [Referenz](/referenz/): Antwortaufbau und alle 36 Spalten
+
+## Maschinenlesbar
+- [openapi.yaml](/openapi.yaml): OpenAPI 3.0.3
+
+## Wichtig
+- Titel (Feld Betreff), Kurzbeschreibung, Dokumente/Volltexte und Porträts sind nicht Open Data und dürfen nicht weiterverwendet werden. Stellungnahmen sind von der Lizenz ausgenommen.
+- Klub-Labels sind uneinheitlich (F und FPÖ). Status 5 heißt abgeschlossen, nicht zwingend beantwortet.
+- Die API erlaubt CORS (access-control-allow-origin: *).

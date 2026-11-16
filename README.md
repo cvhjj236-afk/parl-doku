@@ -1,14 +1,19 @@
 # parl-doku
 
-Inoffizielle API-Doku zu den schriftlichen Anfragen (NR und BR) des österreichischen Parlaments.
-
-- `index.html`: Doku-Seite (statisch, ohne Build)
-- `openapi.yaml`: OpenAPI 3.0.3
-- `llms.txt`: Kurzbeschreibung für KI-Crawler
-
-Hosting: Cloudflare Pages, Domain `parl-doku.hoferbaut.fyi`. Kein Build-Schritt, Ausgabeordner ist das Wurzelverzeichnis.
-Daten: Parlament Österreich, CC BY 4.0.
+Inoffizielle API-Doku zu den Open-Data-Schnittstellen des österreichischen Parlaments (nicht vom Parlament).
 
 Live: https://parl-doku.hoferbaut.fyi
 
-Deployment: automatisch über Cloudflare Pages bei Push auf main.
+## Seiten
+- `/` Übersicht
+- `/schriftliche-anfragen/` NR und BR
+- `/regierungsvorlagen/`
+- `/antraege/` NR und BR
+- `/gesetzesantraege-br/`
+- `/referenz/` Antwortaufbau und 36 Spalten
+- `openapi.yaml` (OpenAPI 3.0.3), `llms.txt`
+
+## Technik
+Statische Seiten ohne Build-Schritt, Ausgabeordner ist das Wurzelverzeichnis. Hosting über Cloudflare Pages, Deployment automatisch bei Push auf `main`.
+
+Daten: Parlament Österreich, CC BY 4.0.
