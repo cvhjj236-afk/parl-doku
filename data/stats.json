@@ -1,0 +1,869 @@
+{
+ "canaries": {
+  "abg_ohne_mw": {
+   "count": null,
+   "expect": "errorMsg",
+   "label": "Abgeordnete NR ohne M/W liefern errorMsg",
+   "status": "ok"
+  },
+  "antr_br_falsch": {
+   "count": 0,
+   "expect": "zero",
+   "label": "Anträge BR mit VHG=ANTR (richtig: ANTR-BR)",
+   "status": "ok"
+  },
+  "aub_br_falsch": {
+   "count": 0,
+   "expect": "zero",
+   "label": "Ausschussberichte BR mit VHG=AUB (richtig: AUB-BR)",
+   "status": "ok"
+  },
+  "bi_br": {
+   "count": 0,
+   "expect": "zero",
+   "label": "Bürgerinitiativen im BR",
+   "status": "ok"
+  },
+  "eu_mtbr_falsch": {
+   "count": 0,
+   "expect": "zero",
+   "label": "EU-Mitteilungen BR mit MTEU-BR (richtig: MT-BR)",
+   "status": "ok"
+  },
+  "eu_s_br": {
+   "count": 0,
+   "expect": "zero",
+   "label": "EU Hauptausschuss S im BR",
+   "status": "ok"
+  },
+  "gabr_br_falsch": {
+   "count": 0,
+   "expect": "zero",
+   "label": "Gesetzesanträge mit NRBR=BR (richtig: NR)",
+   "status": "ok"
+  },
+  "pet_br": {
+   "count": 0,
+   "expect": "zero",
+   "label": "Petitionen im BR",
+   "status": "ok"
+  }
+ },
+ "datasets": {
+  "abgeordnete": {
+   "columns": 12,
+   "count": 182,
+   "label": "Aktuelle Abgeordnete NR",
+   "last_sync": null,
+   "ok": true,
+   "pages_without_showall": 4,
+   "slug": "abgeordnete-nr"
+  },
+  "antr_br": {
+   "columns": 36,
+   "count": 1260,
+   "distribution": {
+    "DOKTYP": {
+     "A(E)-BR": 291,
+     "A-BR": 147,
+     "AA-BR": 3,
+     "AEA-BR": 6,
+     "UEA-BR": 813
+    },
+    "GP": {
+     "V": 2,
+     "VI": 1,
+     "VII": 1,
+     "X": 4,
+     "XI": 1,
+     "XII": 3,
+     "XIII": 1,
+     "XIV": 8,
+     "XIX": 6,
+     "XV": 10,
+     "XVI": 10,
+     "XVII": 21,
+     "XVIII": 22,
+     "XX": 131,
+     "XXI": 61,
+     "XXII": 73,
+     "XXIII": 36,
+     "XXIV": 29,
+     "XXV": 99,
+     "XXVI": 71,
+     "XXVII": 571,
+     "XXVIII": 99
+    },
+    "Status": {
+     "1": 41,
+     "2": 56,
+     "3": 171,
+     "4": 82,
+     "5": 910
+    },
+    "VHG2": {
+     "AA-BR": 3,
+     "AEA-BR": 6,
+     "SELBST-BR": 438,
+     "UEA-BR": 813
+    }
+   },
+   "label": "Anträge BR",
+   "last_sync": "2026-11-16 09:36:09.0",
+   "ok": true,
+   "pages_without_showall": 63,
+   "slug": "antraege"
+  },
+  "antr_nr": {
+   "columns": 36,
+   "count": 29321,
+   "distribution": {
+    "DOKTYP": {
+     "A": 6333,
+     "A(E)": 12012,
+     "A(E)-KN": 439,
+     "A(E)-PN": 38,
+     "A-KN": 64,
+     "A-PN": 28,
+     "AA": 2550,
+     "AAA": 59,
+     "AEA": 555,
+     "AEA-KN": 43,
+     "AEA-PN": 7,
+     "AMIN": 25,
+     "ARH1": 26,
+     "ARH2": 40,
+     "AVA-PN": 5,
+     "AVB": 13,
+     "BUA": 692,
+     "BUA-KN": 17,
+     "BUA-PN": 5,
+     "EAA": 22,
+     "GAA": 14,
+     "UEA": 6008,
+     "UEA-KN": 115,
+     "UEA-PN": 15,
+     "UEAM": 142,
+     "URH2": 19,
+     "ZA": 35
+    },
+    "GP": {
+     "IX": 212,
+     "KN": 678,
+     "PN": 98,
+     "V": 266,
+     "VI": 191,
+     "VII": 239,
+     "VIII": 98,
+     "X": 193,
+     "XI": 128,
+     "XII": 100,
+     "XIII": 206,
+     "XIV": 176,
+     "XIX": 725,
+     "XV": 257,
+     "XVI": 237,
+     "XVII": 482,
+     "XVIII": 780,
+     "XX": 2665,
+     "XXI": 1582,
+     "XXII": 1636,
+     "XXIII": 1581,
+     "XXIV": 3986,
+     "XXV": 3626,
+     "XXVI": 1532,
+     "XXVII": 6026,
+     "XXVIII": 1621
+    },
+    "Status": {
+     "1": 3424,
+     "2": 1645,
+     "3": 8565,
+     "4": 227,
+     "5": 15460
+    },
+    "VHG2": {
+     "AA": 2550,
+     "ANTR": 95,
+     "AUSSELBST": 1319,
+     "SELBST": 19042,
+     "UEA": 6280,
+     "ZA": 35
+    }
+   },
+   "label": "Anträge NR",
+   "last_sync": "2026-11-16 09:36:09.0",
+   "ok": true,
+   "pages_without_showall": 1467,
+   "slug": "antraege"
+  },
+  "aub_br": {
+   "columns": 36,
+   "count": 10292,
+   "distribution": {
+    "DOKTYP": {
+     "AUB-BR": 10292
+    },
+    "GP": {
+     "XI": 340,
+     "XII": 232,
+     "XIII": 737,
+     "XIV": 529,
+     "XIX": 167,
+     "XV": 645,
+     "XVI": 438,
+     "XVII": 699,
+     "XVIII": 820,
+     "XX": 809,
+     "XXI": 561,
+     "XXII": 749,
+     "XXIII": 333,
+     "XXIV": 943,
+     "XXV": 689,
+     "XXVI": 286,
+     "XXVII": 1087,
+     "XXVIII": 228
+    },
+    "Status": {
+     "3": 1,
+     "5": 10291
+    },
+    "VHG2": {
+     "AUB-BR": 10292
+    }
+   },
+   "label": "Ausschussberichte BR",
+   "last_sync": "2026-11-16 09:36:09.0",
+   "ok": true,
+   "pages_without_showall": 515,
+   "slug": "ausschussberichte"
+  },
+  "aub_nr": {
+   "columns": 36,
+   "count": 19189,
+   "distribution": {
+    "DOKTYP": {
+     "AUB": 18858,
+     "AUB-KN": 271,
+     "AUB-PN": 60
+    },
+    "GP": {
+     "IX": 456,
+     "KN": 271,
+     "PN": 60,
+     "V": 444,
+     "VI": 315,
+     "VII": 388,
+     "VIII": 350,
+     "X": 530,
+     "XI": 833,
+     "XII": 314,
+     "XIII": 932,
+     "XIV": 698,
+     "XIX": 226,
+     "XV": 870,
+     "XVI": 640,
+     "XVII": 859,
+     "XVIII": 1178,
+     "XX": 1362,
+     "XXI": 758,
+     "XXII": 977,
+     "XXIII": 425,
+     "XXIV": 1833,
+     "XXV": 1317,
+     "XXVI": 521,
+     "XXVII": 2100,
+     "XXVIII": 532
+    },
+    "Status": {
+     "1": 1178,
+     "3": 8,
+     "5": 18003
+    },
+    "VHG2": {
+     "AUB": 19189
+    }
+   },
+   "label": "Ausschussberichte NR",
+   "last_sync": "2026-11-16 09:36:09.0",
+   "ok": true,
+   "pages_without_showall": 960,
+   "slug": "ausschussberichte"
+  },
+  "ausschuesse": {
+   "columns": 10,
+   "count": 534,
+   "label": "Ausschüsse",
+   "last_sync": "2026-11-16 06:20:11.0",
+   "ok": true,
+   "pages_without_showall": 27,
+   "slug": "ausschuesse"
+  },
+  "beteiligungen": {
+   "columns": 27,
+   "count": 816,
+   "label": "Aktuelle Beteiligungen",
+   "last_sync": "2026-11-16 09:38:52.0",
+   "ok": true,
+   "pages_without_showall": 41,
+   "slug": "beteiligungen"
+  },
+  "bi": {
+   "columns": 36,
+   "count": 489,
+   "distribution": {
+    "DOKTYP": {
+     "BI": 489
+    },
+    "GP": {
+     "XIX": 9,
+     "XX": 25,
+     "XXI": 30,
+     "XXII": 32,
+     "XXIII": 21,
+     "XXIV": 74,
+     "XXV": 121,
+     "XXVI": 67,
+     "XXVII": 74,
+     "XXVIII": 36
+    },
+    "Status": {
+     "3": 11,
+     "4": 156,
+     "5": 322
+    },
+    "VHG2": {
+     "BI": 489
+    }
+   },
+   "label": "Bürgerinitiativen",
+   "last_sync": "2026-11-16 09:36:09.0",
+   "ok": true,
+   "pages_without_showall": 25,
+   "slug": "buergerinitiativen"
+  },
+  "bnr": {
+   "columns": 36,
+   "count": 8458,
+   "distribution": {
+    "DOKTYP": {
+     "BNR": 7611,
+     "BS": 811,
+     "BS-BR": 8,
+     "BSE": 4,
+     "BSESM": 4,
+     "BSESMP": 2,
+     "BSW": 18
+    },
+    "GP": {
+     "XXII": 1369,
+     "XXIII": 564,
+     "XXIV": 1810,
+     "XXV": 1263,
+     "XXVI": 628,
+     "XXVII": 2327,
+     "XXVIII": 497
+    },
+    "Status": {
+     "5": 8458
+    },
+    "VHG2": {
+     "BNR": 8197,
+     "BNRNR": 261
+    }
+   },
+   "label": "Beschlüsse",
+   "last_sync": "2026-11-16 09:36:09.0",
+   "ok": true,
+   "pages_without_showall": 423,
+   "slug": "beschluesse"
+  },
+  "eu_all": {
+   "columns": 36,
+   "count": 47414,
+   "distribution": {
+    "DOKTYP": {
+     "ANT": 6,
+     "ANT-BR": 16,
+     "EUBM": 684,
+     "EUPA": 143,
+     "EUSV": 22779,
+     "MT-BR": 17,
+     "MTEU": 6,
+     "RGEU": 1,
+     "RVEU": 1,
+     "S": 7,
+     "S-BR": 12,
+     "SB-BR": 1,
+     "SEU": 9,
+     "SIN1-BR": 1,
+     "SINF": 104,
+     "SINF-BR": 199,
+     "SLT-BR": 29
+    },
+    "GP": {
+     "XXVII": 16826,
+     "XXVIII": 7189
+    },
+    "Status": {
+     "5": 24015
+    },
+    "VHG2": {
+     "EUBTG": 23606,
+     "EUD": 6,
+     "EUD-BR": 16,
+     "MT-BR": 17,
+     "MTEU": 6,
+     "RGEU": 1,
+     "RVEU": 1,
+     "S": 7,
+     "S-BR": 12,
+     "SB-BR": 1,
+     "SEU": 9,
+     "SINF": 104,
+     "SINF-BR": 200,
+     "SLT-BR": 29
+    }
+   },
+   "distribution_scope": "nur XXVII, XXVIII",
+   "label": "EU-Vorlagen gesamt",
+   "last_sync": "2026-11-16 09:36:09.0",
+   "ok": true,
+   "pages_without_showall": 2371,
+   "slug": "referenz"
+  },
+  "eu_mtbr": {
+   "columns": 36,
+   "count": 74,
+   "distribution": {
+    "DOKTYP": {
+     "MT-BR": 74
+    },
+    "GP": {
+     "XXIV": 20,
+     "XXV": 29,
+     "XXVI": 8,
+     "XXVII": 14,
+     "XXVIII": 3
+    },
+    "Status": {
+     "5": 74
+    },
+    "VHG2": {
+     "MT-BR": 74
+    }
+   },
+   "label": "EU BR Mitteilungen (MT-BR)",
+   "last_sync": "2026-11-16 09:38:52.0",
+   "ok": true,
+   "pages_without_showall": 4,
+   "slug": "eu-mitteilungen-br"
+  },
+  "eu_mteu": {
+   "columns": 36,
+   "count": 27,
+   "distribution": {
+    "DOKTYP": {
+     "MTEU": 27
+    },
+    "GP": {
+     "XXIV": 16,
+     "XXV": 5,
+     "XXVII": 6
+    },
+    "Status": {
+     "5": 27
+    },
+    "VHG2": {
+     "MTEU": 27
+    }
+   },
+   "label": "EU Unterausschuss Mitteilungen (MTEU)",
+   "last_sync": "2026-11-16 09:38:52.0",
+   "ok": true,
+   "pages_without_showall": 2,
+   "slug": "eu-mitteilungen-unterausschuss"
+  },
+  "eu_s": {
+   "columns": 36,
+   "count": 52,
+   "distribution": {
+    "DOKTYP": {
+     "S": 52
+    },
+    "GP": {
+     "XIX": 19,
+     "XX": 11,
+     "XXI": 4,
+     "XXII": 1,
+     "XXIV": 7,
+     "XXVI": 3,
+     "XXVII": 7
+    },
+    "Status": {
+     "1": 1,
+     "5": 51
+    },
+    "VHG2": {
+     "S": 52
+    }
+   },
+   "label": "EU Hauptausschuss (S)",
+   "last_sync": "2026-11-16 09:38:52.0",
+   "ok": true,
+   "pages_without_showall": 3,
+   "slug": "eu-stellungnahmen-hauptausschuss"
+  },
+  "eu_sbbr": {
+   "columns": 36,
+   "count": 27,
+   "distribution": {
+    "DOKTYP": {
+     "SB-BR": 27
+    },
+    "GP": {
+     "XXIV": 9,
+     "XXV": 14,
+     "XXVI": 3,
+     "XXVII": 1
+    },
+    "Status": {
+     "5": 27
+    },
+    "VHG2": {
+     "SB-BR": 27
+    }
+   },
+   "label": "EU BR begründete (SB-BR)",
+   "last_sync": "2026-11-16 09:38:52.0",
+   "ok": true,
+   "pages_without_showall": 2,
+   "slug": "eu-begruendete-stellungnahmen-br"
+  },
+  "eu_sbr": {
+   "columns": 36,
+   "count": 18,
+   "distribution": {
+    "DOKTYP": {
+     "S-BR": 18
+    },
+    "GP": {
+     "XX": 1,
+     "XXIV": 1,
+     "XXV": 3,
+     "XXVI": 1,
+     "XXVII": 12
+    },
+    "Status": {
+     "5": 18
+    },
+    "VHG2": {
+     "S-BR": 18
+    }
+   },
+   "label": "EU BR Stellungnahmen (S-BR)",
+   "last_sync": "2026-11-16 09:38:52.0",
+   "ok": true,
+   "pages_without_showall": 1,
+   "slug": "eu-stellungnahmen-br"
+  },
+  "eu_seu": {
+   "columns": 36,
+   "count": 40,
+   "distribution": {
+    "DOKTYP": {
+     "SEU": 40
+    },
+    "GP": {
+     "XXI": 3,
+     "XXII": 1,
+     "XXIV": 17,
+     "XXV": 7,
+     "XXVI": 3,
+     "XXVII": 9
+    },
+    "Status": {
+     "5": 40
+    },
+    "VHG2": {
+     "SEU": 40
+    }
+   },
+   "label": "EU Unterausschuss Stellungnahmen (SEU)",
+   "last_sync": "2026-11-16 09:38:52.0",
+   "ok": true,
+   "pages_without_showall": 2,
+   "slug": "eu-stellungnahmen-unterausschuss"
+  },
+  "gabr": {
+   "columns": 36,
+   "count": 45,
+   "distribution": {
+    "DOKTYP": {
+     "GABR": 28,
+     "GABR13": 17
+    },
+    "GP": {
+     "XII": 2,
+     "XIV": 6,
+     "XIX": 3,
+     "XVII": 3,
+     "XVIII": 3,
+     "XX": 6,
+     "XXI": 3,
+     "XXII": 4,
+     "XXIII": 2,
+     "XXIV": 3,
+     "XXV": 2,
+     "XXVI": 2,
+     "XXVII": 6
+    },
+    "Status": {
+     "1": 14,
+     "2": 27,
+     "5": 4
+    },
+    "VHG2": {
+     "GABR": 28,
+     "GABR13": 17
+    }
+   },
+   "label": "Gesetzesanträge BR",
+   "last_sync": "2026-11-16 09:36:09.0",
+   "ok": true,
+   "pages_without_showall": 3,
+   "slug": "gesetzesantraege-br"
+  },
+  "korrespondenz": {
+   "columns": 15,
+   "count": 33863,
+   "label": "Parlamentskorrespondenz",
+   "last_sync": "2026-11-16 09:39:24.0",
+   "ok": true,
+   "pages_without_showall": 1694,
+   "slug": "parlamentskorrespondenz"
+  },
+  "mitglieder_br": {
+   "columns": 8,
+   "count": 60,
+   "label": "Aktuelle Mitglieder BR",
+   "last_sync": null,
+   "ok": true,
+   "pages_without_showall": 2,
+   "slug": "mitglieder-br"
+  },
+  "parlamentarier": {
+   "columns": 10,
+   "count": 2963,
+   "label": "Parlamentarier:innen seit 1918",
+   "last_sync": "2026-11-16 08:40:55.0",
+   "ok": true,
+   "pages_without_showall": 149,
+   "slug": "parlamentarier"
+  },
+  "pet": {
+   "columns": 36,
+   "count": 857,
+   "distribution": {
+    "DOKTYP": {
+     "PET": 857
+    },
+    "GP": {
+     "XIX": 20,
+     "XX": 60,
+     "XXI": 102,
+     "XXII": 92,
+     "XXIII": 45,
+     "XXIV": 220,
+     "XXV": 111,
+     "XXVI": 30,
+     "XXVII": 148,
+     "XXVIII": 29
+    },
+    "Status": {
+     "3": 7,
+     "4": 223,
+     "5": 627
+    },
+    "VHG2": {
+     "PET": 857
+    }
+   },
+   "label": "Petitionen",
+   "last_sync": "2026-11-16 09:36:09.0",
+   "ok": true,
+   "pages_without_showall": 43,
+   "slug": "petitionen"
+  },
+  "plenar_br": {
+   "columns": 11,
+   "count": 27,
+   "label": "Plenarsitzungen BR (XXVIII)",
+   "last_sync": null,
+   "ok": true,
+   "pages_without_showall": 1,
+   "slug": "plenarsitzungen"
+  },
+  "plenar_nr": {
+   "columns": 11,
+   "count": 111,
+   "label": "Plenarsitzungen NR (XXVIII)",
+   "last_sync": null,
+   "ok": true,
+   "pages_without_showall": 3,
+   "slug": "plenarsitzungen"
+  },
+  "protokolle": {
+   "columns": 16,
+   "count": 5102,
+   "label": "Stenographische Protokolle",
+   "last_sync": "2026-11-16 09:38:52.0",
+   "ok": true,
+   "pages_without_showall": 256,
+   "slug": "protokolle"
+  },
+  "rv": {
+   "columns": 36,
+   "count": 8102,
+   "distribution": {
+    "DOKTYP": {
+     "RV": 7804,
+     "RV-KN": 225,
+     "RV-PN": 73
+    },
+    "GP": {
+     "IX": 267,
+     "KN": 225,
+     "PN": 73,
+     "V": 448,
+     "VI": 291,
+     "VII": 298,
+     "VIII": 259,
+     "X": 344,
+     "XI": 524,
+     "XII": 174,
+     "XIII": 536,
+     "XIV": 355,
+     "XIX": 96,
+     "XV": 374,
+     "XVI": 270,
+     "XVII": 382,
+     "XVIII": 462,
+     "XX": 443,
+     "XXI": 291,
+     "XXII": 374,
+     "XXIII": 176,
+     "XXIV": 496,
+     "XXV": 331,
+     "XXVI": 117,
+     "XXVII": 365,
+     "XXVIII": 131
+    },
+    "Status": {
+     "1": 4997,
+     "2": 146,
+     "3": 31,
+     "4": 26,
+     "5": 2902
+    },
+    "VHG2": {
+     "RV": 8102
+    }
+   },
+   "label": "Regierungsvorlagen",
+   "last_sync": "2026-11-16 09:36:09.0",
+   "ok": true,
+   "pages_without_showall": 406,
+   "slug": "regierungsvorlagen"
+  },
+  "sa_br": {
+   "columns": 36,
+   "count": 4771,
+   "distribution": {
+    "DOKTYP": {
+     "J-BR": 3296,
+     "JPR-BR": 10,
+     "M-BR": 1465
+    },
+    "GP": {
+     "V": 3,
+     "XIX": 144,
+     "XX": 989,
+     "XXI": 573,
+     "XXII": 678,
+     "XXIII": 290,
+     "XXIV": 515,
+     "XXV": 378,
+     "XXVI": 447,
+     "XXVII": 667,
+     "XXVIII": 87
+    },
+    "Status": {
+     "2": 5,
+     "3": 60,
+     "5": 4706
+    },
+    "VHG2": {
+     "JMIN-BR": 3296,
+     "JPRPR-BR": 10,
+     "M-BR": 1465
+    }
+   },
+   "label": "Anfragen BR",
+   "last_sync": "2026-11-16 09:36:09.0",
+   "ok": true,
+   "pages_without_showall": 239,
+   "slug": "schriftliche-anfragen"
+  },
+  "sa_nr": {
+   "columns": 36,
+   "count": 115609,
+   "distribution": {
+    "DOKTYP": {
+     "J": 27001,
+     "JEU": 2,
+     "JPR": 127,
+     "M": 491,
+     "SJBA": 22
+    },
+    "GP": {
+     "XXVII": 20004,
+     "XXVIII": 7639
+    },
+    "Status": {
+     "3": 687,
+     "5": 26956
+    },
+    "VHG2": {
+     "JMIN": 26982,
+     "JMINEU": 2,
+     "JPRAUS": 5,
+     "JPRPR": 122,
+     "JRH": 19,
+     "M": 491,
+     "SJBA": 22
+    }
+   },
+   "distribution_scope": "nur XXVII, XXVIII",
+   "label": "Anfragen NR",
+   "last_sync": "2026-11-16 09:36:09.0",
+   "ok": true,
+   "pages_without_showall": 5781,
+   "slug": "schriftliche-anfragen"
+  },
+  "termine": {
+   "columns": 29,
+   "count": 23841,
+   "label": "Termine",
+   "last_sync": "2026-11-16 09:30:06.0",
+   "ok": true,
+   "pages_without_showall": 1193,
+   "slug": "termine"
+  }
+ },
+ "generated_at": "2026-11-16T08:37:10Z",
+ "issues": [],
+ "limits": {
+  "showall_row_cap": 100000
+ }
+}

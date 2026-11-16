@@ -1,0 +1,28 @@
+name: Wöchentliche Prüfung
+on:
+  schedule:
+    - cron: '17 4 * * 1'   # montags, 04:17 UTC
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: weekly-probe
+  cancel-in-progress: false
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Schnittstelle prüfen
+        run: python scripts/probe.py
+      - name: Ergebnis committen
+        run: |
+          git config user.name "parl-doku-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data
+          git commit -m "Wöchentliche Prüfung $(date -u +%F)" || echo "nichts zu committen"
+          git push

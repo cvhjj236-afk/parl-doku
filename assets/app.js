@@ -38,4 +38,22 @@
     });
     upd();
   });
+
+  (function(){
+    var box=document.querySelector('.live');if(!box)return;
+    var base=(document.currentScript&&document.currentScript.src)?document.currentScript.src.replace(/assets\/app\.js.*$/,''):'/';
+    var fmt=function(n){return (n==null?'–':String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'.'))};
+    fetch(base+'data/stats.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(s){
+      var slug=box.getAttribute('data-slug'),ds=s.datasets||{},parts=[];
+      Object.keys(ds).forEach(function(k){if(ds[k].slug===slug)parts.push(ds[k])});
+      var when=(s.generated_at||'').slice(0,10).split('-').reverse().join('.');
+      var issues=s.issues||[];
+      var h='<b>Live-Kennzahlen</b> (wöchentlich geprüft, zuletzt '+when+'): ';
+      if(slug===''){h+=Object.keys(ds).length+' Datensätze, '+(issues.length?issues.length+' Auffälligkeit(en)':'keine Auffälligkeiten')+'. <a href="'+base+'data/changes.md">Änderungsbericht</a>'}
+      else if(parts.length){h+=parts.map(function(d){return d.label+': '+fmt(d.count)+(d.capped?' (abgeschnitten)':'')}).join(' · ')}
+      else return;
+      box.className=issues.length?'live on bad':'live on';
+      box.innerHTML=h;
+    }).catch(function(){});
+  })();
 })();

@@ -53,3 +53,6 @@ footer{max-width:1020px;margin:0 auto;padding:6px 24px 40px;color:var(--mute);fo
 .nav a.on,.nav a:hover{background:var(--acc);color:#fff}
 @media(max-width:640px){.sum{display:none}main,.hw{padding-left:14px;padding-right:14px}}
 .nav{flex-wrap:wrap}
+.live{background:var(--soft);border-left:4px solid var(--acc);padding:10px 14px;margin:0 0 18px;font-size:14px;display:none}
+.live.on{display:block}.live.bad{border-left-color:var(--acc2);background:#fff1e6}
+.live a{color:var(--acc)}

@@ -20,3 +20,11 @@ Live: https://parl-doku.hoferbaut.fyi
 Statische Seiten ohne Build-Schritt, Ausgabeordner ist das Wurzelverzeichnis. Hosting über Cloudflare Pages, Deployment automatisch bei Push auf `main`.
 
 Daten: Parlament Österreich, CC BY 4.0.
+
+## Wöchentliche Prüfung
+`.github/workflows/weekly.yml` startet montags `scripts/probe.py`. Das Skript fragt alle Datensätze (zuerst nur den Zähler, dann bei kleineren Datensätzen die Verteilung von `DOKTYP`, `VHG2`, `Status`, GP) und prüft bekannte Stolpersteine, etwa dass `VHG=ANTR` im BR weiterhin 0 Treffer liefert. Ergebnisse:
+- `data/stats.json`: aktueller Stand (wird als Live-Banner auf den Seiten angezeigt)
+- `data/history.jsonl`: Zählerverlauf
+- `data/changes.md`: Änderungen und Auffälligkeiten seit dem letzten Lauf
+
+Manuell starten: `python scripts/probe.py` oder in GitHub unter Actions „Wöchentliche Prüfung“ → Run workflow.
