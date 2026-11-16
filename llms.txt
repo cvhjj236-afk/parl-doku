@@ -1,6 +1,6 @@
 # Parlaments-Daten: API-Doku (inoffiziell)
 
-> Inoffizielle Doku der Open-Data-Schnittstelle des österreichischen Parlaments: schriftliche Anfragen (NR, BR), Regierungsvorlagen, Anträge, Gesetzesanträge des Bundesrats, Ausschussberichte, Beschlüsse und aktuelle Beteiligungen, Bürgerinitiativen, Petitionen, Protokolle, Plenarsitzungen und Personen. Stand 16.11.2026, aus Beobachtung der Schnittstelle. Nicht vom Parlament. Daten: CC BY 4.0.
+> Inoffizielle Doku der Open-Data-Schnittstelle des österreichischen Parlaments: schriftliche Anfragen (NR, BR), Regierungsvorlagen, Anträge, Gesetzesanträge des Bundesrats, Ausschussberichte, Beschlüsse und aktuelle Beteiligungen, Bürgerinitiativen, Petitionen, Protokolle, Plenarsitzungen, Personen, Ausschüsse, Termine, Parlamentskorrespondenz und EU-Vorlagen. Alle 25 Datensätze der Parlaments-Doku. Stand 16.11.2026, aus Beobachtung der Schnittstelle. Nicht vom Parlament. Daten: CC BY 4.0.
 
 Ein Endpunkt für alle Datensätze: POST https://www.parlament.gv.at/Filter/api/filter/data/101?js=eval&showAll=true, der Datensatz wird über den Filter VHG gewählt. Detailseiten: GET /gegenstand/{gp}/{ityp}/{inr}?json=true.
 
@@ -19,6 +19,12 @@ Ein Endpunkt für alle Datensätze: POST https://www.parlament.gv.at/Filter/api/
 - [Plenarsitzungen](/plenarsitzungen/): eigener Endpunkt json/post FBEZ=WFP_007, NRBRBV, GP; Detailseite hat content als Array
 - [Parlamentarier:innen seit 1918](/parlamentarier/): Endpunkt /Filter/api/filter/data/409; Personendaten, Lizenzausnahmen beachten
 - [Aktuelle Abgeordnete NR](/abgeordnete-nr/): eigener Endpunkt FBEZ=WFW_002; M und/oder W Pflicht
+- [Aktuelle Mitglieder BR](/mitglieder-br/): eigener Endpunkt FBEZ=WFW_005; M und W setzen, leerer Body = 0 Zeilen
+- [Parlamentskorrespondenz](/parlamentskorrespondenz/): Endpunkt /Filter/api/filter/data/110; ohne showAll nur 20 Zeilen
+- [Termine](/termine/): Endpunkt /Filter/api/filter/data/600; 29 Spalten; DATERANGE yyyy-mm-dd
+- [Ausschüsse](/ausschuesse/): Endpunkt /Filter/api/filter/data/2008
+- [Ausschussmitgliedschaften](/ausschussmitgliedschaften/): Endpunkt /Filter/api/filter/data/250; Filter PAD_INTERN
+- EU-Vorlagen (VHG=EU, Unterart VHG2): [Hauptausschuss S](/eu-stellungnahmen-hauptausschuss/), [Unterausschuss MTEU](/eu-mitteilungen-unterausschuss/), [Unterausschuss SEU](/eu-stellungnahmen-unterausschuss/), [BR begründete SB-BR](/eu-begruendete-stellungnahmen-br/), [BR Mitteilungen MT-BR](/eu-mitteilungen-br/), [BR Stellungnahmen S-BR](/eu-stellungnahmen-br/); alle 18 VHG2-Werte in der [Referenz](/referenz/#eu)
 - [Referenz](/referenz/): Antwortaufbau und alle 36 Spalten
 
 ## Maschinenlesbar

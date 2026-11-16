@@ -12,6 +12,7 @@ Live: https://parl-doku.hoferbaut.fyi
 - `/gesetzesantraege-br/`
 - `/ausschussberichte/`, `/beschluesse/`, `/beteiligungen/`
 - `/buergerinitiativen/`, `/petitionen/`, `/protokolle/`, `/plenarsitzungen/`, `/parlamentarier/`, `/abgeordnete-nr/`
+- `/mitglieder-br/`, `/parlamentskorrespondenz/`, `/termine/`, `/ausschuesse/`, `/ausschussmitgliedschaften/` und sechs `/eu-…/`-Seiten (alle 25 Datensätze der Parlaments-Doku)
 - `/referenz/` Antwortaufbau und 36 Spalten
 - `openapi.yaml` (OpenAPI 3.0.3), `llms.txt`
 
