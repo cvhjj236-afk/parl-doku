@@ -1,11 +1,11 @@
 (function(){
-  var URL_='https://www.parlament.gv.at/Filter/api/filter/data/101?js=eval&showAll=true';
+  var BASE='https://www.parlament.gv.at/Filter/api/filter/data/';
   document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();
     var t=b.parentElement.querySelector('code').innerText;
     var d=function(){var o=b.textContent;b.textContent='Kopiert';setTimeout(function(){b.textContent=o},1200)};
     try{navigator.clipboard.writeText(t).then(d,function(){})}catch(x){}});});
   document.querySelectorAll('.editor').forEach(function(ed){
-    var ta=ed.querySelector('textarea'),cu=ed.querySelector('.curlcode'),st=ed.querySelector('.state'),run=ed.querySelector('.run'),res=ed.querySelector('.res');
+    var URL_=BASE+(ed.getAttribute('data-ep')||'101')+'?js=eval&showAll=true';var ta=ed.querySelector('textarea'),cu=ed.querySelector('.curlcode'),st=ed.querySelector('.state'),run=ed.querySelector('.run'),res=ed.querySelector('.res');
     function parse(){
       var o;try{o=JSON.parse(ta.value.trim())}catch(e){st.className='state bad';st.textContent='Kein gültiges JSON: '+e.message;return null}
       var bad=[];
@@ -27,9 +27,9 @@
       .then(function(d){
         var lab=d.header.map(function(h){return h.label});
         var col=function(n){return lab.indexOf(n)};
-        var show=['Nummer','Datum','DOKTYP','Status','Fraktionen','THEMEN'].filter(function(n){return col(n)>=0});
+        var show=['Nummer','Nr.','Datum','DOKTYP','Status','Fraktionen','THEMEN','Themen','Stellungnahmen','Unterstützungen','Ressort'].filter(function(n){return col(n)>=0});
         var h='<p class="state ok">'+d.count+' Treffer · lastSync '+esc(d.lastSync)+' · '+d.header.length+' Spalten, '+d.rows.length+' Zeilen geladen. Gezeigt: erste 8 Zeilen, ohne Titel (Betreff).</p><table><tr>'+show.map(function(n){return '<th>'+esc(n)+'</th>'}).join('')+'<th>Link</th></tr>';
-        d.rows.slice(0,8).forEach(function(r){h+='<tr>'+show.map(function(n){return '<td>'+esc(r[col(n)])+'</td>'}).join('')+'<td><a href="https://www.parlament.gv.at'+esc(r[col('HIS_URL')])+'" rel="noopener">öffnen</a></td></tr>'});
+        d.rows.slice(0,8).forEach(function(r){h+='<tr>'+show.map(function(n){return '<td>'+esc(r[col(n)])+'</td>'}).join('')+'<td><a href="https://www.parlament.gv.at'+esc(r[col('HIS_URL')>=0?col('HIS_URL'):col('b')])+'" rel="noopener">öffnen</a></td></tr>'});
         res.innerHTML=h+'</table>';
       })
       .catch(function(e){res.innerHTML='<p class="state bad">Abruf fehlgeschlagen: '+esc(e.message)+'</p>'})

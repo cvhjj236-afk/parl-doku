@@ -10,6 +10,7 @@ Live: https://parl-doku.hoferbaut.fyi
 - `/regierungsvorlagen/`
 - `/antraege/` NR und BR
 - `/gesetzesantraege-br/`
+- `/ausschussberichte/`, `/beschluesse/`, `/beteiligungen/`
 - `/referenz/` Antwortaufbau und 36 Spalten
 - `openapi.yaml` (OpenAPI 3.0.3), `llms.txt`
 

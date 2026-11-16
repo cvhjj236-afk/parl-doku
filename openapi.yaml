@@ -56,6 +56,15 @@ paths:
               antraege_br:
                 summary: Anträge BR (VHG ANTR-BR, nicht ANTR)
                 value: { NRBR: [BR], VHG: [ANTR-BR] }
+              ausschussberichte_nr:
+                summary: Ausschussberichte NR, XXVIII. GP
+                value: { NRBR: [NR], GP_CODE: [XXVIII], VHG: [AUB] }
+              ausschussberichte_br:
+                summary: Ausschussberichte BR (VHG AUB-BR)
+                value: { NRBR: [BR], VHG: [AUB-BR] }
+              beschluesse:
+                summary: Beschlüsse NR, XXVII. GP
+                value: { NRBR: [NR], GP_CODE: [XXVII], VHG: [BNR] }
               gesetzesantraege_br:
                 summary: Gesetzesanträge des BR (mit NRBR NR)
                 value: { NRBR: [NR], VHG: [GABR13] }
@@ -66,6 +75,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FilterResponse'
+  /Filter/api/filter/data/143:
+    post:
+      summary: Aktuelle Beteiligungen (anderer Endpunkt, 27 Spalten, kein VHG)
+      description: Gegenstände mit aktuell möglicher Beteiligung. AKTIV=J muss gesetzt sein. Enthält entgegen der Doku auch Stellungnahmen (SN, SBI, SPET, SNME) und Ministerialentwürfe (MEG).
+      parameters:
+        - { name: js, in: query, required: true, schema: { type: string, enum: [eval] } }
+        - { name: showAll, in: query, required: true, schema: { type: boolean, enum: [true] } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                AKTIV: { type: array, items: { type: string, enum: ['J'] } }
+                BEGUTTYP: { type: array, items: { type: string, enum: [RGES, BI, PET, SN, ME] } }
+                GP_CODE: { type: array, items: { type: string } }
+                DOKTYP: { type: array, items: { type: string } }
+                THEMEN: { type: array, items: { type: string } }
+              required: [AKTIV]
+            examples:
+              gesetzesinitiativen:
+                summary: Aktive Gesetzesinitiativen
+                value: { AKTIV: ['J'], BEGUTTYP: [RGES] }
+      responses:
+        '200':
+          description: Ergebnisliste (pages, lastSync, count, header, rows mit 27 Spalten)
+          content:
+            application/json:
+              schema: { type: object }
   /gegenstand/{gp}/{ityp}/{inr}:
     get:
       summary: Detailseite (Geschichtsseite) eines Gegenstands als JSON
@@ -95,9 +134,9 @@ components:
         NRBR: { type: array, items: { type: string, enum: [NR, BR] }, description: Gremium }
         GP_CODE: { type: array, items: { type: string }, description: 'Gesetzgebungsperiode, römisch (XX … XXVIII)' }
         DATUM_VON: { type: array, items: { type: string }, description: 'Zeitraum, Format dd.mm.yyyy (Start und Ende)' }
-        VHG: { type: array, items: { type: string, enum: [J_JPR_M, J_JPR_M-BR, RV, ANTR, ANTR-BR, GABR, GABR13] }, description: 'Gegenstand = Datensatz. Anfragen NR J_JPR_M, Anfragen BR J_JPR_M-BR, Regierungsvorlagen RV, Anträge NR ANTR, Anträge BR ANTR-BR (Doku sagt ANTR, liefert 0 Treffer), Gesetzesanträge des BR GABR und GABR13 (mit NRBR=NR).' }
-        DOKTYP: { type: array, items: { type: string }, description: 'Art. Anfragen NR: J, JPR. Regierungsvorlagen: RV, RV-KN, RV-PN. Anträge NR: A, A(E), AA, AEA, AMIN, ARH2, AVB, BUA, UEA sowie undokumentiert UEAM, AAA, ZA, ARH1, GAA, EAA. Anträge BR: A-BR, A(E)-BR, AA-BR, AEA-BR, UEA-BR. Gesetzesanträge: GABR, GABR13.' }
-        VHG2: { type: array, items: { type: string, enum: [JMIN, JPRPR, JRH, JPRAUS, JMIN-BR, JPRPR-BR, M-BR, RV, SELBST, UEA, AA, AUSSELBST, ANTR, ZA, SELBST-BR, UEA-BR, AEA-BR, AA-BR, GABR, GABR13] }, description: 'Unterart (beobachtet). JRH, JPRAUS, M-BR und die Antragsgruppen sind in der Doku nicht beschrieben.' }
+        VHG: { type: array, items: { type: string, enum: [J_JPR_M, J_JPR_M-BR, RV, ANTR, ANTR-BR, GABR, GABR13, AUB, AUB-BR, BNR] }, description: 'Gegenstand = Datensatz. Anfragen NR J_JPR_M, Anfragen BR J_JPR_M-BR, Regierungsvorlagen RV, Anträge NR ANTR, Anträge BR ANTR-BR (Doku sagt ANTR, liefert 0 Treffer), Gesetzesanträge des BR GABR und GABR13 (mit NRBR=NR), Ausschussberichte NR AUB und BR AUB-BR, Beschlüsse BNR (NR und BR).' }
+        DOKTYP: { type: array, items: { type: string }, description: 'Art. Anfragen NR: J, JPR. Regierungsvorlagen: RV, RV-KN, RV-PN. Anträge NR: A, A(E), AA, AEA, AMIN, ARH2, AVB, BUA, UEA sowie undokumentiert UEAM, AAA, ZA, ARH1, GAA, EAA. Anträge BR: A-BR, A(E)-BR, AA-BR, AEA-BR, UEA-BR. Gesetzesanträge: GABR, GABR13. Ausschussberichte: AUB, AUB-KN, AUB-PN, AUB-BR. Beschlüsse: BNR, BS, BSE, BSESM, BS-BR sowie undokumentiert BSW, BSESMP.' }
+        VHG2: { type: array, items: { type: string, enum: [JMIN, JPRPR, JRH, JPRAUS, JMIN-BR, JPRPR-BR, M-BR, RV, SELBST, UEA, AA, AUSSELBST, ANTR, ZA, SELBST-BR, UEA-BR, AEA-BR, AA-BR, GABR, GABR13, AUB, AUB-BR, BNRNR] }, description: 'Unterart (beobachtet). JRH, JPRAUS, M-BR und die Antragsgruppen sind in der Doku nicht beschrieben.' }
         THEMEN: { type: array, items: { type: string }, description: '20 feste Themenbereiche' }
         FRAK_CODE: { type: array, items: { type: string, enum: [T, F, B, G, V, N, L, J, P, S, A] }, description: 'Klub/Fraktion (Codes laut Doku)' }
         PAD_INTERN: { type: array, items: { type: string }, description: 'Personen-ID (Datensatz Parlamentarier:innen seit 1918)' }
