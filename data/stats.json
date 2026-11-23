@@ -7,16 +7,16 @@
    "status": "ok"
   },
   "antr_br_falsch": {
-   "count": 0,
+   "count": null,
    "expect": "zero",
    "label": "Anträge BR mit VHG=ANTR (richtig: ANTR-BR)",
-   "status": "ok"
+   "status": "fehler"
   },
   "aub_br_falsch": {
-   "count": 0,
+   "count": null,
    "expect": "zero",
    "label": "Ausschussberichte BR mit VHG=AUB (richtig: AUB-BR)",
-   "status": "ok"
+   "status": "fehler"
   },
   "bi_br": {
    "count": 0,
@@ -43,16 +43,16 @@
    "status": "ok"
   },
   "pet_br": {
-   "count": 0,
+   "count": null,
    "expect": "zero",
    "label": "Petitionen im BR",
-   "status": "ok"
+   "status": "fehler"
   }
  },
  "datasets": {
   "abgeordnete": {
    "columns": 12,
-   "count": 182,
+   "count": 183,
    "label": "Aktuelle Abgeordnete NR",
    "last_sync": null,
    "ok": true,
@@ -109,18 +109,18 @@
     }
    },
    "label": "Anträge BR",
-   "last_sync": "2026-11-16 09:36:09.0",
+   "last_sync": "2026-11-23 15:50:44.0",
    "ok": true,
    "pages_without_showall": 63,
    "slug": "antraege"
   },
   "antr_nr": {
    "columns": 36,
-   "count": 29321,
+   "count": 29363,
    "distribution": {
     "DOKTYP": {
-     "A": 6333,
-     "A(E)": 12012,
+     "A": 6345,
+     "A(E)": 12040,
      "A(E)-KN": 439,
      "A(E)-PN": 38,
      "A-KN": 64,
@@ -140,7 +140,7 @@
      "BUA-PN": 5,
      "EAA": 22,
      "GAA": 14,
-     "UEA": 6008,
+     "UEA": 6010,
      "UEA-KN": 115,
      "UEA-PN": 15,
      "UEAM": 142,
@@ -173,77 +173,42 @@
      "XXV": 3626,
      "XXVI": 1532,
      "XXVII": 6026,
-     "XXVIII": 1621
+     "XXVIII": 1663
     },
     "Status": {
      "1": 3424,
-     "2": 1645,
-     "3": 8565,
-     "4": 227,
-     "5": 15460
+     "2": 1653,
+     "3": 8592,
+     "4": 231,
+     "5": 15463
     },
     "VHG2": {
      "AA": 2550,
      "ANTR": 95,
      "AUSSELBST": 1319,
-     "SELBST": 19042,
-     "UEA": 6280,
+     "SELBST": 19082,
+     "UEA": 6282,
      "ZA": 35
     }
    },
    "label": "Anträge NR",
-   "last_sync": "2026-11-16 09:36:09.0",
+   "last_sync": "2026-11-23 15:50:44.0",
    "ok": true,
-   "pages_without_showall": 1467,
+   "pages_without_showall": 1469,
    "slug": "antraege"
   },
   "aub_br": {
-   "columns": 36,
-   "count": 10292,
-   "distribution": {
-    "DOKTYP": {
-     "AUB-BR": 10292
-    },
-    "GP": {
-     "XI": 340,
-     "XII": 232,
-     "XIII": 737,
-     "XIV": 529,
-     "XIX": 167,
-     "XV": 645,
-     "XVI": 438,
-     "XVII": 699,
-     "XVIII": 820,
-     "XX": 809,
-     "XXI": 561,
-     "XXII": 749,
-     "XXIII": 333,
-     "XXIV": 943,
-     "XXV": 689,
-     "XXVI": 286,
-     "XXVII": 1087,
-     "XXVIII": 228
-    },
-    "Status": {
-     "3": 1,
-     "5": 10291
-    },
-    "VHG2": {
-     "AUB-BR": 10292
-    }
-   },
+   "error": "<urlopen error [Errno 101] Network is unreachable>",
    "label": "Ausschussberichte BR",
-   "last_sync": "2026-11-16 09:36:09.0",
-   "ok": true,
-   "pages_without_showall": 515,
+   "ok": false,
    "slug": "ausschussberichte"
   },
   "aub_nr": {
    "columns": 36,
-   "count": 19189,
+   "count": 19192,
    "distribution": {
     "DOKTYP": {
-     "AUB": 18858,
+     "AUB": 18861,
      "AUB-KN": 271,
      "AUB-PN": 60
     },
@@ -273,19 +238,19 @@
      "XXV": 1317,
      "XXVI": 521,
      "XXVII": 2100,
-     "XXVIII": 532
+     "XXVIII": 535
     },
     "Status": {
      "1": 1178,
      "3": 8,
-     "5": 18003
+     "5": 18006
     },
     "VHG2": {
-     "AUB": 19189
+     "AUB": 19192
     }
    },
    "label": "Ausschussberichte NR",
-   "last_sync": "2026-11-16 09:36:09.0",
+   "last_sync": "2026-11-23 15:53:43.0",
    "ok": true,
    "pages_without_showall": 960,
    "slug": "ausschussberichte"
@@ -294,18 +259,18 @@
    "columns": 10,
    "count": 534,
    "label": "Ausschüsse",
-   "last_sync": "2026-11-16 06:20:11.0",
+   "last_sync": "2026-11-23 07:10:16.0",
    "ok": true,
    "pages_without_showall": 27,
    "slug": "ausschuesse"
   },
   "beteiligungen": {
    "columns": 27,
-   "count": 816,
+   "count": 877,
    "label": "Aktuelle Beteiligungen",
-   "last_sync": "2026-11-16 09:38:52.0",
+   "last_sync": "2026-11-23 16:03:46.0",
    "ok": true,
-   "pages_without_showall": 41,
+   "pages_without_showall": 44,
    "slug": "beteiligungen"
   },
   "bi": {
@@ -337,59 +302,29 @@
     }
    },
    "label": "Bürgerinitiativen",
-   "last_sync": "2026-11-16 09:36:09.0",
+   "last_sync": "2026-11-23 15:57:34.0",
    "ok": true,
    "pages_without_showall": 25,
    "slug": "buergerinitiativen"
   },
   "bnr": {
-   "columns": 36,
-   "count": 8458,
-   "distribution": {
-    "DOKTYP": {
-     "BNR": 7611,
-     "BS": 811,
-     "BS-BR": 8,
-     "BSE": 4,
-     "BSESM": 4,
-     "BSESMP": 2,
-     "BSW": 18
-    },
-    "GP": {
-     "XXII": 1369,
-     "XXIII": 564,
-     "XXIV": 1810,
-     "XXV": 1263,
-     "XXVI": 628,
-     "XXVII": 2327,
-     "XXVIII": 497
-    },
-    "Status": {
-     "5": 8458
-    },
-    "VHG2": {
-     "BNR": 8197,
-     "BNRNR": 261
-    }
-   },
+   "error": "<urlopen error [Errno 101] Network is unreachable>",
    "label": "Beschlüsse",
-   "last_sync": "2026-11-16 09:36:09.0",
-   "ok": true,
-   "pages_without_showall": 423,
+   "ok": false,
    "slug": "beschluesse"
   },
   "eu_all": {
    "columns": 36,
-   "count": 47414,
+   "count": 47514,
    "distribution": {
     "DOKTYP": {
      "ANT": 6,
      "ANT-BR": 16,
-     "EUBM": 684,
+     "EUBM": 687,
      "EUPA": 143,
-     "EUSV": 22779,
+     "EUSV": 22875,
      "MT-BR": 17,
-     "MTEU": 6,
+     "MTEU": 7,
      "RGEU": 1,
      "RVEU": 1,
      "S": 7,
@@ -403,17 +338,17 @@
     },
     "GP": {
      "XXVII": 16826,
-     "XXVIII": 7189
+     "XXVIII": 7289
     },
     "Status": {
-     "5": 24015
+     "5": 24115
     },
     "VHG2": {
-     "EUBTG": 23606,
+     "EUBTG": 23705,
      "EUD": 6,
      "EUD-BR": 16,
      "MT-BR": 17,
-     "MTEU": 6,
+     "MTEU": 7,
      "RGEU": 1,
      "RVEU": 1,
      "S": 7,
@@ -427,9 +362,9 @@
    },
    "distribution_scope": "nur XXVII, XXVIII",
    "label": "EU-Vorlagen gesamt",
-   "last_sync": "2026-11-16 09:36:09.0",
+   "last_sync": "2026-11-23 15:57:34.0",
    "ok": true,
-   "pages_without_showall": 2371,
+   "pages_without_showall": 2376,
    "slug": "referenz"
   },
   "eu_mtbr": {
@@ -454,64 +389,41 @@
     }
    },
    "label": "EU BR Mitteilungen (MT-BR)",
-   "last_sync": "2026-11-16 09:38:52.0",
+   "last_sync": "2026-11-23 16:00:53.0",
    "ok": true,
    "pages_without_showall": 4,
    "slug": "eu-mitteilungen-br"
   },
   "eu_mteu": {
    "columns": 36,
-   "count": 27,
+   "count": 28,
    "distribution": {
     "DOKTYP": {
-     "MTEU": 27
+     "MTEU": 28
     },
     "GP": {
      "XXIV": 16,
      "XXV": 5,
-     "XXVII": 6
+     "XXVII": 6,
+     "XXVIII": 1
     },
     "Status": {
-     "5": 27
+     "5": 28
     },
     "VHG2": {
-     "MTEU": 27
+     "MTEU": 28
     }
    },
    "label": "EU Unterausschuss Mitteilungen (MTEU)",
-   "last_sync": "2026-11-16 09:38:52.0",
+   "last_sync": "2026-11-23 16:00:53.0",
    "ok": true,
    "pages_without_showall": 2,
    "slug": "eu-mitteilungen-unterausschuss"
   },
   "eu_s": {
-   "columns": 36,
-   "count": 52,
-   "distribution": {
-    "DOKTYP": {
-     "S": 52
-    },
-    "GP": {
-     "XIX": 19,
-     "XX": 11,
-     "XXI": 4,
-     "XXII": 1,
-     "XXIV": 7,
-     "XXVI": 3,
-     "XXVII": 7
-    },
-    "Status": {
-     "1": 1,
-     "5": 51
-    },
-    "VHG2": {
-     "S": 52
-    }
-   },
+   "error": "<urlopen error [Errno 101] Network is unreachable>",
    "label": "EU Hauptausschuss (S)",
-   "last_sync": "2026-11-16 09:38:52.0",
-   "ok": true,
-   "pages_without_showall": 3,
+   "ok": false,
    "slug": "eu-stellungnahmen-hauptausschuss"
   },
   "eu_sbbr": {
@@ -535,7 +447,7 @@
     }
    },
    "label": "EU BR begründete (SB-BR)",
-   "last_sync": "2026-11-16 09:38:52.0",
+   "last_sync": "2026-11-23 16:00:53.0",
    "ok": true,
    "pages_without_showall": 2,
    "slug": "eu-begruendete-stellungnahmen-br"
@@ -562,7 +474,7 @@
     }
    },
    "label": "EU BR Stellungnahmen (S-BR)",
-   "last_sync": "2026-11-16 09:38:52.0",
+   "last_sync": "2026-11-23 16:00:53.0",
    "ok": true,
    "pages_without_showall": 1,
    "slug": "eu-stellungnahmen-br"
@@ -590,7 +502,7 @@
     }
    },
    "label": "EU Unterausschuss Stellungnahmen (SEU)",
-   "last_sync": "2026-11-16 09:38:52.0",
+   "last_sync": "2026-11-23 16:00:53.0",
    "ok": true,
    "pages_without_showall": 2,
    "slug": "eu-stellungnahmen-unterausschuss"
@@ -629,18 +541,18 @@
     }
    },
    "label": "Gesetzesanträge BR",
-   "last_sync": "2026-11-16 09:36:09.0",
+   "last_sync": "2026-11-23 15:53:43.0",
    "ok": true,
    "pages_without_showall": 3,
    "slug": "gesetzesantraege-br"
   },
   "korrespondenz": {
    "columns": 15,
-   "count": 33863,
+   "count": 33909,
    "label": "Parlamentskorrespondenz",
-   "last_sync": "2026-11-16 09:39:24.0",
+   "last_sync": "2026-11-23 16:04:22.0",
    "ok": true,
-   "pages_without_showall": 1694,
+   "pages_without_showall": 1696,
    "slug": "parlamentskorrespondenz"
   },
   "mitglieder_br": {
@@ -654,9 +566,9 @@
   },
   "parlamentarier": {
    "columns": 10,
-   "count": 2963,
+   "count": 2964,
    "label": "Parlamentarier:innen seit 1918",
-   "last_sync": "2026-11-16 08:40:55.0",
+   "last_sync": "2026-11-23 15:40:48.0",
    "ok": true,
    "pages_without_showall": 149,
    "slug": "parlamentarier"
@@ -690,7 +602,7 @@
     }
    },
    "label": "Petitionen",
-   "last_sync": "2026-11-16 09:36:09.0",
+   "last_sync": "2026-11-23 15:57:34.0",
    "ok": true,
    "pages_without_showall": 43,
    "slug": "petitionen"
@@ -715,19 +627,19 @@
   },
   "protokolle": {
    "columns": 16,
-   "count": 5102,
+   "count": 5105,
    "label": "Stenographische Protokolle",
-   "last_sync": "2026-11-16 09:38:52.0",
+   "last_sync": "2026-11-23 16:04:22.0",
    "ok": true,
    "pages_without_showall": 256,
    "slug": "protokolle"
   },
   "rv": {
    "columns": 36,
-   "count": 8102,
+   "count": 8126,
    "distribution": {
     "DOKTYP": {
-     "RV": 7804,
+     "RV": 7828,
      "RV-KN": 225,
      "RV-PN": 73
     },
@@ -757,23 +669,23 @@
      "XXV": 331,
      "XXVI": 117,
      "XXVII": 365,
-     "XXVIII": 131
+     "XXVIII": 155
     },
     "Status": {
-     "1": 4997,
-     "2": 146,
+     "1": 4994,
+     "2": 169,
      "3": 31,
-     "4": 26,
-     "5": 2902
+     "4": 28,
+     "5": 2904
     },
     "VHG2": {
-     "RV": 8102
+     "RV": 8126
     }
    },
    "label": "Regierungsvorlagen",
-   "last_sync": "2026-11-16 09:36:09.0",
+   "last_sync": "2026-11-23 15:50:44.0",
    "ok": true,
-   "pages_without_showall": 406,
+   "pages_without_showall": 407,
    "slug": "regierungsvorlagen"
   },
   "sa_br": {
@@ -800,8 +712,8 @@
     },
     "Status": {
      "2": 5,
-     "3": 60,
-     "5": 4706
+     "3": 55,
+     "5": 4711
     },
     "VHG2": {
      "JMIN-BR": 3296,
@@ -810,17 +722,17 @@
     }
    },
    "label": "Anfragen BR",
-   "last_sync": "2026-11-16 09:36:09.0",
+   "last_sync": "2026-11-23 15:50:44.0",
    "ok": true,
    "pages_without_showall": 239,
    "slug": "schriftliche-anfragen"
   },
   "sa_nr": {
    "columns": 36,
-   "count": 115609,
+   "count": 115658,
    "distribution": {
     "DOKTYP": {
-     "J": 27001,
+     "J": 27050,
      "JEU": 2,
      "JPR": 127,
      "M": 491,
@@ -828,14 +740,14 @@
     },
     "GP": {
      "XXVII": 20004,
-     "XXVIII": 7639
+     "XXVIII": 7688
     },
     "Status": {
-     "3": 687,
-     "5": 26956
+     "3": 704,
+     "5": 26988
     },
     "VHG2": {
-     "JMIN": 26982,
+     "JMIN": 27031,
      "JMINEU": 2,
      "JPRAUS": 5,
      "JPRPR": 122,
@@ -846,23 +758,42 @@
    },
    "distribution_scope": "nur XXVII, XXVIII",
    "label": "Anfragen NR",
-   "last_sync": "2026-11-16 09:36:09.0",
+   "last_sync": "2026-11-23 15:50:44.0",
    "ok": true,
-   "pages_without_showall": 5781,
+   "pages_without_showall": 5783,
    "slug": "schriftliche-anfragen"
   },
   "termine": {
    "columns": 29,
-   "count": 23841,
+   "count": 23868,
    "label": "Termine",
-   "last_sync": "2026-11-16 09:30:06.0",
+   "last_sync": "2026-11-23 16:00:08.0",
    "ok": true,
-   "pages_without_showall": 1193,
+   "pages_without_showall": 1194,
    "slug": "termine"
   }
  },
- "generated_at": "2026-11-16T08:37:10Z",
- "issues": [],
+ "generated_at": "2026-11-23T14:53:15Z",
+ "issues": [
+  "**Ausschussberichte BR**: Abruf fehlgeschlagen (<urlopen error [Errno 101] Network is unreachable>)",
+  "**Ausschussberichte BR**: Spaltenzahl 36 → None",
+  "**Ausschussberichte BR**: DOKTYP-Werte verschwunden ['AUB-BR']",
+  "**Ausschussberichte BR**: VHG2-Werte verschwunden ['AUB-BR']",
+  "**Ausschussberichte BR**: Status-Werte verschwunden ['3', '5']",
+  "**Beschlüsse**: Abruf fehlgeschlagen (<urlopen error [Errno 101] Network is unreachable>)",
+  "**Beschlüsse**: Spaltenzahl 36 → None",
+  "**Beschlüsse**: DOKTYP-Werte verschwunden ['BNR', 'BS', 'BS-BR', 'BSE', 'BSESM', 'BSESMP', 'BSW']",
+  "**Beschlüsse**: VHG2-Werte verschwunden ['BNR', 'BNRNR']",
+  "**Beschlüsse**: Status-Werte verschwunden ['5']",
+  "**EU Hauptausschuss (S)**: Abruf fehlgeschlagen (<urlopen error [Errno 101] Network is unreachable>)",
+  "**EU Hauptausschuss (S)**: Spaltenzahl 36 → None",
+  "**EU Hauptausschuss (S)**: DOKTYP-Werte verschwunden ['S']",
+  "**EU Hauptausschuss (S)**: VHG2-Werte verschwunden ['S']",
+  "**EU Hauptausschuss (S)**: Status-Werte verschwunden ['1', '5']",
+  "**Stolperstein geändert**: Anträge BR mit VHG=ANTR (richtig: ANTR-BR) (erwartet zero, Ergebnis None)",
+  "**Stolperstein geändert**: Ausschussberichte BR mit VHG=AUB (richtig: AUB-BR) (erwartet zero, Ergebnis None)",
+  "**Stolperstein geändert**: Petitionen im BR (erwartet zero, Ergebnis None)"
+ ],
  "limits": {
   "showall_row_cap": 100000
  }
