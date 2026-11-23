@@ -62,6 +62,11 @@ footer{max-width:1020px;margin:0 auto;padding:6px 24px 40px;color:var(--mute);fo
 .dim{display:flex;flex-direction:column;gap:3px;font-size:13px}
 .dim select,.dim input{font:13px system-ui,sans-serif;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);max-width:100%}
 .dim .dates{display:flex;gap:6px;align-items:center}
-.yamlbox{margin:28px 0 8px}
-.yamlbox>summary{cursor:pointer;font-weight:600;margin-bottom:8px}
-.yamlbox pre{max-height:440px;overflow:auto}
+.yamlbox{margin:28px 0 8px;border:1px solid var(--line);border-radius:10px;background:#fff;overflow:hidden}
+.yamlbox>summary{cursor:pointer;font-weight:600;padding:12px 16px;list-style:none;display:flex;align-items:center;gap:8px;background:var(--soft)}
+.yamlbox>summary::-webkit-details-marker{display:none}
+.yamlbox>summary::before{content:"▸";color:var(--acc);transition:transform .15s}
+.yamlbox[open]>summary::before{transform:rotate(90deg)}
+.yamlbox[open]>summary{border-bottom:1px solid var(--line)}
+.yamlbox pre{max-height:440px;overflow:auto;margin:12px 16px 8px}
+.yamlbox>p{margin:0 16px 12px}

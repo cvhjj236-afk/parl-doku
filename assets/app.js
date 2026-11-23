@@ -124,7 +124,7 @@
   (function(){
     var main=document.querySelector('main');if(!main)return;
     var base=(document.currentScript&&document.currentScript.src)?document.currentScript.src.replace(/assets\/app\.js.*$/,''):'/';
-    var d=document.createElement('details');d.className='yamlbox';d.open=true;
+    var d=document.createElement('details');d.className='yamlbox';
     d.innerHTML='<summary>OpenAPI-Spezifikation <code>openapi.yaml</code> (gesamte Doku, maschinenlesbar)</summary><pre><button class="copy">Kopieren</button><code>Lade …</code></pre><p style="font-size:13px"><a href="'+base+'openapi.yaml" download>openapi.yaml herunterladen</a></p>';
     main.appendChild(d);
     var code=d.querySelector('pre code'),btn=d.querySelector('.copy');
