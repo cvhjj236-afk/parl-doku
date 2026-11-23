@@ -56,3 +56,9 @@ footer{max-width:1020px;margin:0 auto;padding:6px 24px 40px;color:var(--mute);fo
 .live{background:var(--soft);border-left:4px solid var(--acc);padding:10px 14px;margin:0 0 18px;font-size:14px;display:none}
 .live.on{display:block}.live.bad{border-left-color:var(--acc2);background:#fff1e6}
 .live a{color:var(--acc)}
+.dims{margin:8px 0 12px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--soft)}
+.dims-h{font-size:13px;color:var(--mute);margin-bottom:8px}
+.dims-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px 14px}
+.dim{display:flex;flex-direction:column;gap:3px;font-size:13px}
+.dim select,.dim input{font:13px system-ui,sans-serif;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);max-width:100%}
+.dim .dates{display:flex;gap:6px;align-items:center}
