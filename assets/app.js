@@ -127,7 +127,7 @@
     var d=document.createElement('details');d.className='yamlbox';d.open=true;
     d.innerHTML='<summary>OpenAPI-Spezifikation <code>openapi.yaml</code> (gesamte Doku, maschinenlesbar)</summary><pre><button class="copy">Kopieren</button><code>Lade …</code></pre><p style="font-size:13px"><a href="'+base+'openapi.yaml" download>openapi.yaml herunterladen</a></p>';
     main.appendChild(d);
-    var code=d.querySelector('code'),btn=d.querySelector('.copy');
+    var code=d.querySelector('pre code'),btn=d.querySelector('.copy');
     btn.addEventListener('click',function(e){e.preventDefault();var o=btn.textContent;
       try{navigator.clipboard.writeText(code.textContent).then(function(){btn.textContent='Kopiert';setTimeout(function(){btn.textContent=o},1200)},function(){})}catch(x){}});
     fetch(base+'openapi.yaml',{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.text()})
